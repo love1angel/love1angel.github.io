@@ -8,28 +8,23 @@ document.addEventListener("pjax:success", initScrollReveal);
 </script><link rel="icon" type="image/svg+xml" href="/yun.svg"><link rel="mask-icon" href="/yun.svg" color="#0078E7"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><script id="yun-config">
     window.Yun = {}
     window.CONFIG = {"hostname":"love1angel.github.io","root":"/","title":["Stay hungry!","Stay foolish!"],"version":"1.8.10","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/avatar/none.jpg","say":{"api":"https://v1.hitokoto.cn","hitokoto":true},"fireworks":{"colors":null},"vendors":{"darken":"https://cdn.jsdelivr.net/npm/darken@1.5.0"}};
-  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/hexo-theme-yun.js" type="module"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css"><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js" defer></script><script src="/js/load-aplayer.js" defer></script><meta name="description" content="What is Markdown?Markdown 是一种轻量级的文本标记写法（markup language），广泛用于 GitHub，博客等各种 Web 网站。Markdown guide 网站源码：GitHub，网站教程已经写的很好，本文借鉴于此，做个笔记 原理 处理 markdown 文件的应用程序将该格式文件转换为 HTML, 在 Web 浏览器中显示  Markdown 使用一种称为">
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/hexo-theme-yun.js" type="module"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css"><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js" defer></script><script src="/js/load-aplayer.js" defer></script><meta name="description" content="What is Markdown?Markdown 是一种轻量级的文本标记写法（markup language），广泛用于 GitHub，博客等各种 Web 网站。Markdown guide 网站源码：GitHub，网站教程已经写的很好，本文借鉴于此，做个笔记 原理处理 markdown 文件的应用程序使用一种称为 Markdown 处理器，也叫解析器或者实现的东西将该格式文件转换为 HTML,">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Markdown">
 <meta property="og:url" content="https://love1angel.github.io/2022/03/19/Markdown/index.html">
 <meta property="og:site_name" content="helianthus&#39;s blog">
-<meta property="og:description" content="What is Markdown?Markdown 是一种轻量级的文本标记写法（markup language），广泛用于 GitHub，博客等各种 Web 网站。Markdown guide 网站源码：GitHub，网站教程已经写的很好，本文借鉴于此，做个笔记 原理 处理 markdown 文件的应用程序将该格式文件转换为 HTML, 在 Web 浏览器中显示  Markdown 使用一种称为">
+<meta property="og:description" content="What is Markdown?Markdown 是一种轻量级的文本标记写法（markup language），广泛用于 GitHub，博客等各种 Web 网站。Markdown guide 网站源码：GitHub，网站教程已经写的很好，本文借鉴于此，做个笔记 原理处理 markdown 文件的应用程序使用一种称为 Markdown 处理器，也叫解析器或者实现的东西将该格式文件转换为 HTML,">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-03-19T03:44:08.000Z">
-<meta property="article:modified_time" content="2022-03-19T08:17:55.314Z">
+<meta property="article:modified_time" content="2022-03-20T05:38:39.173Z">
 <meta property="article:author" content="Peng Xie">
 <meta name="twitter:card" content="summary"><script>(function() {
   const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
   const setting = localStorage.getItem('darken-mode') || 'auto'
   if (setting === 'dark' || (prefersDark && setting !== 'light'))
     document.documentElement.classList.toggle('dark', true)
-})()</script></head><body><script defer src="https://cdn.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-list-ordered"></use></svg></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-passport-line"></use></svg></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="Peng Xie"><img width="96" loading="lazy" src="/images/avatar_1.jpeg" alt="Peng Xie"></a><div class="site-author-name"><a href="/about/">Peng Xie</a></div><span class="site-name">helianthus's blog</span><sub class="site-subtitle"></sub><div class="site-desciption"></div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-archive-line"></use></svg></span><span class="site-state-item-count">5</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-2-line"></use></svg></span><span class="site-state-item-count">5</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="site-state-item-count">4</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-settings-line"></use></svg></span></a></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="/atom.xml" title="RSS" target="_blank" style="color:orange"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-rss-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://user.qzone.qq.com/1762638547/infocenter" title="QQ" target="_blank" style="color:#12B7F5"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-qq-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/love1angel" title="GitHub" target="_blank" style="color:#181717"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-github-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="mailto:helianthus547@gmail.com" title="E-Mail" target="_blank" style="color:#8E71C1"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-mail-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://music.163.com/#/user/home?id=501425218" title="网易云音乐" target="_blank" style="color:#C10D0C"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-netease-cloud-music-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://www.zhihu.com/people/helianthus-57-88" title="知乎" target="_blank" style="color:#0084FF"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhihu-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://space.bilibili.com/343600342" title="哔哩哔哩动画" target="_blank" style="color:#FF8EB3"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-bilibili-line"></use></svg></a></div><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:dodgerblue"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-genderless-line"></use></svg></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-contrast-2-line"></use></svg></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#What-is-Markdown"><span class="toc-number">1.</span> <span class="toc-text">What is Markdown?</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-number">1.1.</span> <span class="toc-text">原理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-use-Markdown"><span class="toc-number">2.</span> <span class="toc-text">Why use Markdown?</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E6%88%90-GitHub-Pages"><span class="toc-number">2.1.</span> <span class="toc-text">生成 GitHub Pages</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#how-to-use-Markdown"><span class="toc-number">3.</span> <span class="toc-text">how to use Markdown?</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#basic-syntax"><span class="toc-number">3.1.</span> <span class="toc-text">basic syntax</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95"><span class="toc-number">3.1.1.</span> <span class="toc-text">扩展语法</span></a></li></ol></li></ol></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#0078E7;"><link itemprop="mainEntityOfPage" href="https://love1angel.github.io/2022/03/19/Markdown/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Peng Xie"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="helianthus's blog"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">Markdown</h1><div class="post-meta"><div class="post-time"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-line"></use></svg></span> <time title="创建时间：2022-03-19 11:44:08" itemprop="dateCreated datePublished" datetime="2022-03-19T11:44:08+08:00">2022-03-19</time></div><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-line"></use></svg></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/data-format/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">data format</span></a></span></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><h1 id="What-is-Markdown"><a href="#What-is-Markdown" class="headerlink" title="What is Markdown?"></a>What is Markdown?</h1><p>Markdown 是一种轻量级的文本标记写法（markup language），广泛用于 GitHub，博客等各种 Web 网站。<a target="_blank" rel="noopener" href="https://www.markdownguide.org/">Markdown guide</a> 网站源码：<a target="_blank" rel="noopener" href="https://github.com/mattcone/markdown-guide">GitHub</a>，网站教程已经写的很好，本文借鉴于此，做个笔记</p>
-<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><ol>
-<li><p>处理 markdown 文件的应用程序将该格式文件转换为 HTML, 在 Web 浏览器中显示</p>
-</li>
-<li><p>Markdown 使用一种称为 Markdown 处理器，也叫解析器或者实现</p>
-</li>
-</ol>
+})()</script></head><body><script defer src="https://cdn.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-list-ordered"></use></svg></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-passport-line"></use></svg></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="Peng Xie"><img width="96" loading="lazy" src="/images/avatar_1.jpeg" alt="Peng Xie"></a><div class="site-author-name"><a href="/about/">Peng Xie</a></div><span class="site-name">helianthus's blog</span><sub class="site-subtitle"></sub><div class="site-desciption"></div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-archive-line"></use></svg></span><span class="site-state-item-count">5</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-2-line"></use></svg></span><span class="site-state-item-count">5</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="site-state-item-count">4</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-settings-line"></use></svg></span></a></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="/atom.xml" title="RSS" target="_blank" style="color:orange"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-rss-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://user.qzone.qq.com/1762638547/infocenter" title="QQ" target="_blank" style="color:#12B7F5"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-qq-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/love1angel" title="GitHub" target="_blank" style="color:#181717"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-github-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="mailto:helianthus547@gmail.com" title="E-Mail" target="_blank" style="color:#8E71C1"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-mail-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://music.163.com/#/user/home?id=501425218" title="网易云音乐" target="_blank" style="color:#C10D0C"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-netease-cloud-music-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://www.zhihu.com/people/helianthus-57-88" title="知乎" target="_blank" style="color:#0084FF"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhihu-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://space.bilibili.com/343600342" title="哔哩哔哩动画" target="_blank" style="color:#FF8EB3"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-bilibili-line"></use></svg></a></div><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:dodgerblue"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-genderless-line"></use></svg></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-contrast-2-line"></use></svg></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#What-is-Markdown"><span class="toc-number">1.</span> <span class="toc-text">What is Markdown?</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-number">1.1.</span> <span class="toc-text">原理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-use-Markdown"><span class="toc-number">2.</span> <span class="toc-text">Why use Markdown?</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E6%88%90-GitHub-Pages"><span class="toc-number">2.1.</span> <span class="toc-text">生成 GitHub Pages</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#How-to-use-Markdown"><span class="toc-number">3.</span> <span class="toc-text">How to use Markdown?</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Basic-Syntax"><span class="toc-number">3.1.</span> <span class="toc-text">Basic Syntax</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Extended-Syntax"><span class="toc-number">3.2.</span> <span class="toc-text">Extended Syntax</span></a></li></ol></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#0078E7;"><link itemprop="mainEntityOfPage" href="https://love1angel.github.io/2022/03/19/Markdown/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Peng Xie"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="helianthus's blog"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">Markdown</h1><div class="post-meta"><div class="post-time"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-line"></use></svg></span> <time title="创建时间：2022-03-19 11:44:08" itemprop="dateCreated datePublished" datetime="2022-03-19T11:44:08+08:00">2022-03-19</time><span class="post-meta-divider">-</span><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-2-line"></use></svg></span> <time title="修改时间：2022-03-20 13:38:39" itemprop="dateModified" datetime="2022-03-20T13:38:39+08:00">2022-03-20</time></div><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-line"></use></svg></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/data-format/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">data format</span></a></span></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><h1 id="What-is-Markdown"><a href="#What-is-Markdown" class="headerlink" title="What is Markdown?"></a>What is Markdown?</h1><p>Markdown 是一种轻量级的文本标记写法（markup language），广泛用于 GitHub，博客等各种 Web 网站。<a target="_blank" rel="noopener" href="https://www.markdownguide.org/">Markdown guide</a> 网站源码：<a target="_blank" rel="noopener" href="https://github.com/mattcone/markdown-guide">GitHub</a>，网站教程已经写的很好，本文借鉴于此，做个笔记</p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>处理 markdown 文件的应用程序使用一种称为 Markdown 处理器，也叫解析器或者实现的东西将该格式文件转换为 HTML, 在通过 Web 浏览器进行显示</p>
 <h1 id="Why-use-Markdown"><a href="#Why-use-Markdown" class="headerlink" title="Why use Markdown?"></a>Why use Markdown?</h1><ol>
 <li><p>easy to learn, use, light-weight</p>
 </li>
@@ -42,88 +37,148 @@ document.addEventListener("pjax:success", initScrollReveal);
 <li><p>Markdown 可以内嵌 HTML 语法，许多网站内嵌 Markdown 处理器，适合现在 Web 浏览器显示</p>
 </li>
 </ol>
-<h2 id="生成-GitHub-Pages"><a href="#生成-GitHub-Pages" class="headerlink" title="生成 GitHub Pages"></a>生成 <a target="_blank" rel="noopener" href="https://docs.github.com/cn">GitHub</a> Pages</h2><p><a target="_blank" rel="noopener" href="http://markdown.p2hp.com/tools/github-pages/index.html">GitHub Pages</a> uses <a target="_blank" rel="noopener" href="http://markdown.p2hp.com/tools/jekyll/index.html">Jekyll</a> as the backend for its free website creation service</p>
+<h2 id="生成-GitHub-Pages"><a href="#生成-GitHub-Pages" class="headerlink" title="生成 GitHub Pages"></a>生成 <a target="_blank" rel="noopener" href="https://docs.github.com/cn">GitHub</a> Pages</h2><p>GitHub 为 Jekyll 提供免费的网页 host 服务</p>
+<p><a target="_blank" rel="noopener" href="http://markdown.p2hp.com/tools/github-pages/index.html">GitHub Pages</a> uses <a target="_blank" rel="noopener" href="http://markdown.p2hp.com/tools/jekyll/index.html">Jekyll</a> as the backend for its free website creation service</p>
 <p><a target="_blank" rel="noopener" href="https://www.staticgen.com/">其他可用的静态网站生成器</a></p>
 <p>如果您想使用内容管理系统（CMS）来为网站提供动力，请查看<a target="_blank" rel="noopener" href="https://ghost.org/">Ghost</a>。这是一个免费的开源博客平台，具有出色的Markdown编辑器。如果您是WordPress用户，您将很高兴知道WordPress.com上托管的网站有<a target="_blank" rel="noopener" href="https://en.support.wordpress.com/markdown/">Markdown支持</a>。自托管的WordPress网站可以使用<a target="_blank" rel="noopener" href="https://jetpack.com/support/markdown/">Jetpack插件</a>。</p>
-<h1 id="how-to-use-Markdown"><a href="#how-to-use-Markdown" class="headerlink" title="how to use Markdown?"></a>how to use Markdown?</h1><h2 id="basic-syntax"><a href="#basic-syntax" class="headerlink" title="basic syntax"></a>basic syntax</h2><ol>
-<li>标题</li>
-</ol>
-<pre class="language-markdown" data-language="markdown"><code class="language-markdown"><span class="token title important"><span class="token punctuation">#</span> 标题</span></code></pre>
+<h1 id="How-to-use-Markdown"><a href="#How-to-use-Markdown" class="headerlink" title="How to use Markdown?"></a>How to use Markdown?</h1><h2 id="Basic-Syntax"><a href="#Basic-Syntax" class="headerlink" title="Basic Syntax"></a>Basic Syntax</h2><ol>
+<li><p>标题</p>
+<pre class="language-markdown" data-language="markdown"><code class="language-markdown"><span class="token title important"><span class="token punctuation">#</span> 标题</span>
+or
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">></span></span>
 
-<ol start="2">
-<li>粗体</li>
-</ol>
-<pre class="language-markdown" data-language="markdown"><code class="language-markdown"><span class="token bold"><span class="token punctuation">**</span><span class="token content">bold</span><span class="token punctuation">**</span></span></code></pre>
-
-<ol start="3">
-<li>斜体</li>
-</ol>
-<pre class="language-markdown" data-language="markdown"><code class="language-markdown"><span class="token italic"><span class="token punctuation">*</span><span class="token content">italic</span><span class="token punctuation">*</span></span></code></pre>
-
-<ol start="4">
-<li>块引用</li>
-</ol>
-<pre class="language-markdown" data-language="markdown"><code class="language-markdown"><span class="token blockquote punctuation">></span> blockquote</code></pre>
-
-<ol start="5">
-<li>有序列表</li>
-</ol>
+段落分行
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">></span></span></code></pre></li>
+<li><p>粗体</p>
+<pre class="language-markdown" data-language="markdown"><code class="language-markdown"><span class="token bold"><span class="token punctuation">**</span><span class="token content">bold</span><span class="token punctuation">**</span></span>
+or
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>strong</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>strong</span><span class="token punctuation">></span></span></code></pre></li>
+<li><p>斜体</p>
+<pre class="language-markdown" data-language="markdown"><code class="language-markdown"><span class="token italic"><span class="token punctuation">*</span><span class="token content">italic</span><span class="token punctuation">*</span></span>
+or
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>em</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>em</span><span class="token punctuation">></span></span></code></pre></li>
+<li><p>块引用</p>
+<pre class="language-markdown" data-language="markdown"><code class="language-markdown"><span class="token blockquote punctuation">></span> blockquote
+<span class="token blockquote punctuation">>></span> two
+之间分行
+<span class="token blockquote punctuation">></span> <span class="token title important"><span class="token punctuation">###</span></span>
+<span class="token blockquote punctuation">></span> 
+<span class="token blockquote punctuation">></span> -</code></pre></li>
+<li><p>有序列表</p>
 <pre class="language-markdown" data-language="markdown"><code class="language-markdown"><span class="token list punctuation">1.</span> ordered list
-<span class="token list punctuation">2.</span> two</code></pre>
+<span class="token list punctuation">2.</span> two
 
-<ol start="6">
-<li>无序列表</li>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ol</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ol</span><span class="token punctuation">></span></span>
+
+1968\. 转义</code></pre></li>
+<li><p>无序列表</p>
+<pre class="language-markdown" data-language="markdown"><code class="language-markdown"><span class="token list punctuation">-</span> unordered list
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span></code></pre></li>
+<li><p>code</p>
+<pre class="language-markdown" data-language="markdown"><code class="language-markdown"><span class="token code-snippet code keyword">`code`</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>code</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>code</span><span class="token punctuation">></span></span>
+Use <span class="token code-snippet code keyword">`code`</span> in your Markdown file.</code></pre></li>
+<li><p>水平线 horizontal rule</p>
+<pre class="language-markdown" data-language="markdown"><code class="language-markdown"><span class="token hr punctuation">---</span>
+之间分行</code></pre></li>
+<li><p>链接</p>
+<pre class="language-markdown" data-language="markdown"><code class="language-markdown">[title](link address "悬停提示")
+
+&lt;https://www.markdownguide.org>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>fake@example.com</span><span class="token punctuation">></span></span>
+
+I love supporting the <span class="token bold"><span class="token punctuation">**</span><span class="token content"><span class="token url">[<span class="token content">EFF</span>](<span class="token url">https://eff.org</span>)</span></span><span class="token punctuation">**</span></span>.
+This is the <span class="token italic"><span class="token punctuation">*</span><span class="token content"><span class="token url">[<span class="token content">Markdown Guide</span>](<span class="token url">https://www.markdownguide.org</span>)</span></span><span class="token punctuation">*</span></span>.
+See the section on <span class="token url">[<span class="token content"><span class="token code-snippet code keyword">`code`</span></span>](<span class="token url">#code</span>)</span>.
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span>link<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
+与原来的链接一样，1 为 1 的链接
+<span class="token url">[<span class="token content">hobbit-hole</span>][<span class="token variable">1</span>]</span>
+<span class="token url-reference url"><span class="token punctuation">[</span><span class="token variable">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token punctuation">&lt;</span>https://en.wikipedia.org/wiki/Hobbit#Lifestyle<span class="token punctuation">></span> <span class="token string">"Hobbit lifestyles"</span></span></code></pre></li>
+<li><p>图片</p>
+<pre class="language-markdown" data-language="markdown"><code class="language-markdown"><span class="token url"><span class="token operator">!</span>[<span class="token content">alt 不显示的时候</span>](<span class="token url">image.jpg</span>)</span>
+
+<span class="token url">[<span class="token content">![An old rock in the desert</span>](<span class="token url">/assets/images/shiprock.jpg</span> <span class="token string">"Shiprock, New Mexico by Beau Rogers"</span>)</span>](https://www.flickr.com/photos/)</code></pre></li>
 </ol>
-<pre class="language-markdown" data-language="markdown"><code class="language-markdown"><span class="token list punctuation">-</span> unordered list</code></pre>
+<p>不能在块级元素使用 Markdown 语法，不会工作</p>
+<p>\进行转义</p>
+<h2 id="Extended-Syntax"><a href="#Extended-Syntax" class="headerlink" title="Extended Syntax"></a>Extended Syntax</h2><p><a target="_blank" rel="noopener" href="https://github.github.com/gfm/">GitHub Flavored Markdown (GFM)</a></p>
+<ol>
+<li><p>表格 table</p>
+<pre class="language-markdown" data-language="markdown"><code class="language-markdown"><span class="token table"><span class="token table-header-row"><span class="token punctuation">|</span><span class="token table-header important"> class </span><span class="token punctuation">|</span><span class="token table-header important"> name </span><span class="token punctuation">|</span><span class="token table-header important"> test </span><span class="token punctuation">|</span>
+</span><span class="token table-line"><span class="token punctuation">|</span><span class="token punctuation">:-----:</span><span class="token punctuation">|</span><span class="token punctuation">:----:</span><span class="token punctuation">|</span><span class="token punctuation">:----:</span><span class="token punctuation">|</span>
+</span><span class="token table-data-rows"><span class="token punctuation">|</span><span class="token table-data"> 1     </span><span class="token punctuation">|</span><span class="token table-data"> 2    </span><span class="token punctuation">|</span><span class="token table-data"> \|   </span><span class="token punctuation">|</span>
+</span></span>
+表中可以用 HTML 语法加入 list</code></pre></li>
+<li><p>代码块 fenced code block</p>
+<pre class="language-markdown" data-language="markdown"><code class="language-markdown">```json
+&#123;
+    "firstname": "John",
+    "lastname": "Smith",
+    "age": 25
+&#125;
+\`\`\`</code></pre></li>
+<li><p>脚注 footnote</p>
+<pre class="language-none"><code class="language-none">Here&#39;s a simple footnote,[^1] and here&#39;s a longer one.[^bignote]
 
-<ol start="7">
-<li>code</li>
+[^1]: This is the first footnote.
+
+[^bignote]: Here&#39;s one with multiple paragraphs and code.
+
+    Indent paragraphs to include them in the footnote.
+
+    &#96;&#123; my code &#125;&#96;
+
+    Add as many paragraphs as you like.</code></pre></li>
+<li><p>标题 ID heading ID</p>
+<pre class="language-markdown" data-language="markdown"><code class="language-markdown"><span class="token title important"><span class="token punctuation">###</span> My Great Heading &#123;#custom-id&#125;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h3</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>custom-id<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>My Great Heading<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h3</span><span class="token punctuation">></span></span>
+<span class="token url">[<span class="token content">Heading IDs</span>](<span class="token url">#heading-ids</span>)</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#heading-ids<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Heading IDs<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
+<span class="token url">[<span class="token content">Heading IDs</span>](<span class="token url">https://www.markdownguide.org/extended-syntax#heading-ids</span>)</span></code></pre></li>
+<li><p>定义列表 definition list</p>
+<pre class="language-markdown" data-language="markdown"><code class="language-markdown">term
+: definitionFirst Term
+: This is the definition of the first term.
+
+Second Term
+: This is one definition of the second term.
+: This is another definition of the second term.
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dl</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dt</span><span class="token punctuation">></span></span>First Term<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dt</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dd</span><span class="token punctuation">></span></span>This is the definition of the first term.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dd</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dt</span><span class="token punctuation">></span></span>Second Term<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dt</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dd</span><span class="token punctuation">></span></span>This is one definition of the second term. <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dd</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dd</span><span class="token punctuation">></span></span>This is another definition of the second term.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dd</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dl</span><span class="token punctuation">></span></span></code></pre></li>
+<li><p>删除线 strikethrough</p>
+<pre class="language-markdown" data-language="markdown"><code class="language-markdown"><span class="token strike"><span class="token punctuation">~~</span><span class="token content">The world is flat.</span><span class="token punctuation">~~</span></span></code></pre></li>
+<li><p>任务列表 task list</p>
+<pre class="language-markdown" data-language="markdown"><code class="language-markdown"><span class="token list punctuation">-</span> [x]
+<span class="token list punctuation">-</span> [ ]</code></pre></li>
+<li><p>表情 emoji</p>
+<p><a target="_blank" rel="noopener" href="https://emojipedia.org/">Emojipedia</a></p>
+<p><a target="_blank" rel="noopener" href="https://gist.github.com/rxaviers/7360908">list of emoji shortcodes</a></p>
+<pre class="language-markdown" data-language="markdown"><code class="language-markdown">That is so funny! :joy:</code></pre></li>
+<li><p>高亮 highlight</p>
+<pre class="language-markdown" data-language="markdown"><code class="language-markdown">I need to highlight these ==very important words==.
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mark</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>mark</span><span class="token punctuation">></span></span></code></pre></li>
+<li><p>下标 subscript</p>
+<pre class="language-markdown" data-language="markdown"><code class="language-markdown">H<span class="token strike"><span class="token punctuation">~</span><span class="token content">2</span><span class="token punctuation">~</span></span>0
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>sub</span><span class="token punctuation">></span></span>2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>sub</span><span class="token punctuation">></span></span></code></pre></li>
+<li><p>上标 superscript</p>
+<pre class="language-markdown" data-language="markdown"><code class="language-markdown">X^2^
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>sup</span><span class="token punctuation">></span></span>2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>sup</span><span class="token punctuation">></span></span></code></pre></li>
 </ol>
-<pre class="language-none"><code class="language-none">&#96;code&#96;</code></pre>
-
-<ol start="8">
-<li>水平线 horizontal rule</li>
-</ol>
-<pre class="language-markdown" data-language="markdown"><code class="language-markdown"><span class="token hr punctuation">---</span></code></pre>
-
-<ol start="9">
-<li>链接</li>
-</ol>
-<pre class="language-markdown" data-language="markdown"><code class="language-markdown"><span class="token url">[<span class="token content">title</span>](<span class="token url">link</span>)</span></code></pre>
-
-<ol start="10">
-<li>图片</li>
-</ol>
-<pre class="language-markdown" data-language="markdown"><code class="language-markdown"><span class="token url"><span class="token operator">!</span>[<span class="token content">alt 不显示的时候</span>](<span class="token url">image.jpg</span>)</span></code></pre>
-
-<h3 id="扩展语法"><a href="#扩展语法" class="headerlink" title="扩展语法"></a>扩展语法</h3><ul>
-<li><p>表格：| test | test2 |</p>
-</li>
-<li><p>代码块：</p>
-</li>
-</ul>
-<pre class="language-cpp" data-language="cpp"><code class="language-cpp">std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"hello, world"</span> <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span></code></pre>
-
-<ul>
-<li>脚注：</li>
-</ul>
-<p>footnote. [^1]</p>
-<ul>
-<li><p>标题 id：</p>
-</li>
-<li><p>自定义列表</p>
-</li>
-<li><p>删除线：</p>
-</li>
-</ul>
-<p><del>test</del></p>
-<ul>
-<li><p>任务列表</p>
-</li>
-<li><p><input checked="" disabled="" type="checkbox">  finish</p>
-</li>
-<li><p><input disabled="" type="checkbox">  not finish</p>
-</li>
-</ul>
-<pre class="language-cpp" data-language="cpp"><code class="language-cpp">std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"hello world"</span> <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl</code></pre>
+<p>diable automatic URL linking</p>
+<pre class="language-markdown" data-language="markdown"><code class="language-markdown"><span class="token code-snippet code keyword">`http://www.example.com`</span></code></pre>
 </div></section><div id="reward-container"><span class="hty-icon-button button-glow" id="reward-button" title="打赏" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === &quot;none&quot;) ? &quot;block&quot; : &quot;none&quot;;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-hand-coin-line"></use></svg></span><div id="reward-comment">I'm so cute. Please give me money.</div></div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>Peng Xie</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="https://love1angel.github.io/2022/03/19/Markdown/" title="Markdown">https://love1angel.github.io/2022/03/19/Markdown/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><svg class="icon"><use xlink:href="#icon-creative-commons-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-by-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-nc-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-sa-line"></use></svg></a> 许可协议。</li></ul></article><div class="post-nav"><div class="post-nav-item"></div><div class="post-nav-item"><a class="post-nav-next" href="/2022/03/18/Redis/" rel="next" title="Redis"><span class="post-nav-text">Redis</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-right-s-line"></use></svg></a></div></div></div><div class="hty-card" id="comment"></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2019 – 2022 </span><span class="with-love" id="animate"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-cloud-line"></use></svg></span><span class="author"> Peng Xie</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v6.1.0</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.8.10</span></div></footer><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-up-s-line"></use></svg><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a></div></body></html>
