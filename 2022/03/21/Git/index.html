@@ -1,0 +1,213 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="Peng Xie"><meta name="copyright" content="Peng Xie"><meta name="generator" content="Hexo 6.1.0"><meta name="theme" content="hexo-theme-yun"><title>Git | helianthus's blog</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/star-markdown-css@0.2.4/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="//at.alicdn.com/t/font_1140697_dxory92pb0h.js" async></script><script src="https://cdn.jsdelivr.net/npm/@unocss/runtime/mini.global.js"></script><script src="https://cdn.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link rel="icon" type="image/svg+xml" href="/yun.svg"><link rel="mask-icon" href="/yun.svg" color="#0078E7"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><script id="yun-config">
+    window.Yun = {}
+    window.CONFIG = {"hostname":"love1angel.github.io","root":"/","title":["Stay hungry!","Stay foolish!"],"version":"1.8.10","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/avatar/none.jpg","say":{"api":"https://v1.hitokoto.cn","hitokoto":true},"fireworks":{"colors":null},"vendors":{"darken":"https://cdn.jsdelivr.net/npm/darken@1.5.0"}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/hexo-theme-yun.js" type="module"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css"><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js" defer></script><script src="/js/load-aplayer.js" defer></script><meta name="description" content="git使用目的：Linus为了管理Linux源码用C语言开发的分布式版本控制系统类型：分布式分布式 VS 集中式 集中式：CVS和SVN等 分布式：git等 集中式通常也有一台充当中央服务器的电脑，主要是为了方便交换大家的修改  集中式的缺点 版本库集中存放在中央服务器，需要联网获得最新的版本 只有一个中央服务器可能会宕机，导致所有人无法工作 中央服务器的版本库一旦出现存在问题，难以补救，不安全">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git">
+<meta property="og:url" content="https://love1angel.github.io/2022/03/21/Git/index.html">
+<meta property="og:site_name" content="helianthus&#39;s blog">
+<meta property="og:description" content="git使用目的：Linus为了管理Linux源码用C语言开发的分布式版本控制系统类型：分布式分布式 VS 集中式 集中式：CVS和SVN等 分布式：git等 集中式通常也有一台充当中央服务器的电脑，主要是为了方便交换大家的修改  集中式的缺点 版本库集中存放在中央服务器，需要联网获得最新的版本 只有一个中央服务器可能会宕机，导致所有人无法工作 中央服务器的版本库一旦出现存在问题，难以补救，不安全">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-03-21T05:58:03.000Z">
+<meta property="article:modified_time" content="2022-03-21T05:58:16.491Z">
+<meta property="article:author" content="Peng Xie">
+<meta property="article:tag" content="Git">
+<meta name="twitter:card" content="summary"><script>(function() {
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const setting = localStorage.getItem('darken-mode') || 'auto'
+  if (setting === 'dark' || (prefersDark && setting !== 'light'))
+    document.documentElement.classList.toggle('dark', true)
+})()</script></head><body><script defer src="https://cdn.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-list-ordered"></use></svg></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-passport-line"></use></svg></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="Peng Xie"><img width="96" loading="lazy" src="/images/avatar_1.jpeg" alt="Peng Xie"></a><div class="site-author-name"><a href="/about/">Peng Xie</a></div><span class="site-name">helianthus's blog</span><sub class="site-subtitle"></sub><div class="site-desciption"></div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-archive-line"></use></svg></span><span class="site-state-item-count">6</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-2-line"></use></svg></span><span class="site-state-item-count">5</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="site-state-item-count">5</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-settings-line"></use></svg></span></a></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="/atom.xml" title="RSS" target="_blank" style="color:orange"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-rss-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://user.qzone.qq.com/1762638547/infocenter" title="QQ" target="_blank" style="color:#12B7F5"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-qq-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/love1angel" title="GitHub" target="_blank" style="color:#181717"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-github-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="mailto:helianthus547@gmail.com" title="E-Mail" target="_blank" style="color:#8E71C1"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-mail-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://music.163.com/#/user/home?id=501425218" title="网易云音乐" target="_blank" style="color:#C10D0C"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-netease-cloud-music-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://www.zhihu.com/people/helianthus-57-88" title="知乎" target="_blank" style="color:#0084FF"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhihu-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://space.bilibili.com/343600342" title="哔哩哔哩动画" target="_blank" style="color:#FF8EB3"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-bilibili-line"></use></svg></a></div><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:dodgerblue"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-genderless-line"></use></svg></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-contrast-2-line"></use></svg></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#git%E4%BD%BF%E7%94%A8"><span class="toc-number">1.</span> <span class="toc-text">git使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E7%9A%84%EF%BC%9ALinus%E4%B8%BA%E4%BA%86%E7%AE%A1%E7%90%86Linux%E6%BA%90%E7%A0%81%E7%94%A8C%E8%AF%AD%E8%A8%80%E5%BC%80%E5%8F%91%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8F%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.1.</span> <span class="toc-text">目的：Linus为了管理Linux源码用C语言开发的分布式版本控制系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F"><span class="toc-number">1.2.</span> <span class="toc-text">类型：分布式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F-VS-%E9%9B%86%E4%B8%AD%E5%BC%8F"><span class="toc-number">1.2.1.</span> <span class="toc-text">分布式 VS 集中式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E4%B8%AD%E5%BC%8F%E7%9A%84%E7%BC%BA%E7%82%B9"><span class="toc-number">1.2.2.</span> <span class="toc-text">集中式的缺点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#let%E2%80%99s-start"><span class="toc-number">1.3.</span> <span class="toc-text">let’s start:)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%86%E5%A4%87"><span class="toc-number">1.3.1.</span> <span class="toc-text">准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#changes-not-staged-for-commit"><span class="toc-number">1.3.2.</span> <span class="toc-text">changes not staged for commit</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A6%81%E6%8F%90%E4%BA%A4%E7%9A%84%E5%8F%98%E6%9B%B4"><span class="toc-number">1.3.3.</span> <span class="toc-text">要提交的变更</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8Brepository%E7%9A%84%E7%8A%B6%E6%80%81"><span class="toc-number">1.4.</span> <span class="toc-text">查看repository的状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6"><span class="toc-number">1.5.</span> <span class="toc-text">版本控制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%A1%E7%90%86%E4%BF%AE%E6%94%B9"><span class="toc-number">1.6.</span> <span class="toc-text">管理修改</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9C%E7%A8%8B%E5%BA%93"><span class="toc-number">1.7.</span> <span class="toc-text">远程库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86"><span class="toc-number">1.8.</span> <span class="toc-text">分支管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%90%88%E5%B9%B6%E5%88%86%E6%94%AF"><span class="toc-number">1.9.</span> <span class="toc-text">创建合并分支</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%B2%E7%AA%81%E8%A7%A3%E5%86%B3"><span class="toc-number">1.10.</span> <span class="toc-text">冲突解决</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BUG%E5%88%86%E6%94%AF%EF%BC%8Cfeature%E5%88%86%E6%94%AF"><span class="toc-number">1.11.</span> <span class="toc-text">BUG分支，feature分支</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E4%BA%BA%E5%BC%80%E5%8F%91"><span class="toc-number">1.12.</span> <span class="toc-text">多人开发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tag"><span class="toc-number">1.13.</span> <span class="toc-text">tag</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git%E4%B8%AA%E6%80%A7%E5%8C%96%E5%AE%9A%E5%88%B6"><span class="toc-number">1.14.</span> <span class="toc-text">git个性化定制</span></a></li></ol></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#0078E7;"><link itemprop="mainEntityOfPage" href="https://love1angel.github.io/2022/03/21/Git/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Peng Xie"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="helianthus's blog"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">Git</h1><div class="post-meta"><div class="post-time"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-line"></use></svg></span> <time title="创建时间：2022-03-21 13:58:03" itemprop="dateCreated datePublished" datetime="2022-03-21T13:58:03+08:00">2022-03-21</time></div><div class="post-classify"><span class="post-tag"><a class="tag-item" href="/tags/Git/" style="--text-color:#F14E32"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="tag-name">Git</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><h1 id="git使用"><a href="#git使用" class="headerlink" title="git使用"></a>git使用</h1><h2 id="目的：Linus为了管理Linux源码用C语言开发的分布式版本控制系统"><a href="#目的：Linus为了管理Linux源码用C语言开发的分布式版本控制系统" class="headerlink" title="目的：Linus为了管理Linux源码用C语言开发的分布式版本控制系统"></a>目的：Linus为了管理Linux源码用C语言开发的分布式版本控制系统</h2><h2 id="类型：分布式"><a href="#类型：分布式" class="headerlink" title="类型：分布式"></a>类型：分布式</h2><h3 id="分布式-VS-集中式"><a href="#分布式-VS-集中式" class="headerlink" title="分布式 VS 集中式"></a>分布式 VS 集中式</h3><ol>
+<li>集中式：CVS和SVN等</li>
+<li>分布式：git等</li>
+<li>集中式通常也有一台充当中央服务器的电脑，主要是为了方便交换大家的修改</li>
+</ol>
+<h3 id="集中式的缺点"><a href="#集中式的缺点" class="headerlink" title="集中式的缺点"></a>集中式的缺点</h3><ul>
+<li>版本库集中存放在中央服务器，需要联网获得最新的版本</li>
+<li>只有一个中央服务器可能会宕机，导致所有人无法工作</li>
+<li>中央服务器的版本库一旦出现存在问题，难以补救，不安全</li>
+</ul>
+<h2 id="let’s-start"><a href="#let’s-start" class="headerlink" title="let’s start:)"></a>let’s start:)</h2><h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><ol>
+<li>download git</li>
+<li>设置本机的user信息，本机所有repository都会使用这个配置，对单独的仓库也可以单独设置，通过git config命令查看参数选项</li>
+</ol>
+<pre class="language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> config --global user.name <span class="token string">"your name"</span>
+$ <span class="token function">git</span> config --global user.email <span class="token string">"email@example.com"</span></code></pre>
+
+<ol start="3">
+<li>查看本地global参数</li>
+</ol>
+<pre class="language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> config --list --global</code></pre>
+
+<p><span style="color:red;font-weight:bold">!!! 修改global参数后以前的提交还是以前的user参数，???git repository如何识别user呢</span></p>
+<ol start="4">
+<li>初始化一个仓库，会在当前目录添加一个隐藏目录(.git)</li>
+</ol>
+<pre class="language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> init</code></pre>
+
+<p><span style="color:red;font-weight:bold">!!! git 只能跟踪文本文件的改动，图片、视频这些二进制文件，没法跟踪文件的变化</span></p>
+<h3 id="changes-not-staged-for-commit"><a href="#changes-not-staged-for-commit" class="headerlink" title="changes not staged for commit"></a>changes not staged for commit</h3><ol>
+<li>untracked changes -&gt; staged changes(update what will be committed)</li>
+</ol>
+<pre class="language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> <span class="token function">add</span> <span class="token operator">&lt;</span>files<span class="token operator">></span></code></pre>
+
+<ol start="2">
+<li>discard changes in working directory(将工作区的状态回到暂存区的状态)</li>
+</ol>
+<pre class="language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> checkout -- <span class="token operator">&lt;</span>files<span class="token operator">></span></code></pre>
+
+<h3 id="要提交的变更"><a href="#要提交的变更" class="headerlink" title="要提交的变更"></a>要提交的变更</h3><ol>
+<li>staged changes -&gt; untracked changes(将暂存区会退到到head所指的分支，并把暂存区的修改回退到工作区)</li>
+</ol>
+<pre class="language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> reset HEAD <span class="token operator">&lt;</span>files<span class="token operator">></span></code></pre>
+
+<ol start="2">
+<li>提交</li>
+</ol>
+<pre class="language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> commit -m <span class="token string">""</span></code></pre>
+
+<h2 id="查看repository的状态"><a href="#查看repository的状态" class="headerlink" title="查看repository的状态"></a>查看repository的状态</h2><ol>
+<li>查看过去日志</li>
+</ol>
+<pre class="language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> log</code></pre>
+
+<ol start="2">
+<li>查看当前状态</li>
+</ol>
+<pre class="language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> status</code></pre>
+
+<h2 id="版本控制"><a href="#版本控制" class="headerlink" title="版本控制"></a>版本控制</h2><ol>
+<li>回到过去(之前的修改保存到untracked changes，暂存区也回退)</li>
+</ol>
+<pre class="language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> reset HEAD^
+$ <span class="token function">git</span> reset HEAD~1</code></pre>
+
+<ol start="2">
+<li>强制回退，可以通过commitID在回去，丢弃所有目前的修改，不建议用</li>
+</ol>
+<pre class="language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> reset --hard HEAD^
+$ <span class="token function">git</span> reset --hard 7f1f</code></pre>
+
+<ol start="3">
+<li>查看命令历史，回到未来</li>
+</ol>
+<pre class="language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> reflog</code></pre>
+
+<h2 id="管理修改"><a href="#管理修改" class="headerlink" title="管理修改"></a>管理修改</h2><ol>
+<li>比较工作区和HEAD指针所指向的分支</li>
+</ol>
+<pre class="language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> <span class="token function">diff</span></code></pre>
+
+<h2 id="远程库"><a href="#远程库" class="headerlink" title="远程库"></a>远程库</h2><pre class="language-bash" data-language="bash"><code class="language-bash">$ ssh-keygen -t rsa -C <span class="token string">"youremail@example.com"</span></code></pre>
+
+<ol>
+<li>本地仓库关联远程仓库</li>
+</ol>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 测试一下ssh-key添加是否成功</span>
+$ <span class="token function">ssh</span> -T git@github.com
+<span class="token comment"># 关联远程仓库，本地取名叫origin</span>
+$ <span class="token function">git</span> remote <span class="token function">add</span> origin https://github.com/love1angel/work.git
+<span class="token comment"># 查看本地分支，即可查看远程分支remotes/origin/main</span>
+$ <span class="token function">git</span> branch -a
+<span class="token comment"># 将本地分支master重命名为main分支</span>
+$ <span class="token function">git</span> branch -M main
+<span class="token comment"># 第一次push main分支，远程库会创建main分支，同时将本地main分支push到orgin的main分支，-u参数会将本地的main分支与远程的main分支关联起来</span>
+$ <span class="token function">git</span> push -u origin main
+<span class="token comment"># 直接push main分支到origin</span>
+$ <span class="token function">git</span> push origin main
+
+<span class="token comment"># 远程库</span>
+$ <span class="token function">git</span> remote -v
+<span class="token comment"># 删除远程库联系</span>
+$ <span class="token function">git</span> remote <span class="token function">rm</span> origin
+
+<span class="token comment"># 使用clone会自动关联远程库</span>
+$ <span class="token function">git</span> clone</code></pre>
+
+<h2 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h2><h2 id="创建合并分支"><a href="#创建合并分支" class="headerlink" title="创建合并分支"></a>创建合并分支</h2><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 新建分支并切换</span>
+$ <span class="token function">git</span> checkout -b dev
+
+<span class="token comment"># equals to</span>
+$ <span class="token function">git</span> branch dev
+$ <span class="token function">git</span> checkout dev
+
+<span class="token comment"># 检查一下</span>
+$ <span class="token function">git</span> branch
+
+<span class="token comment"># 将dev分支合并到master分支</span>
+$ <span class="token function">git</span> merge dev
+
+<span class="token comment"># 删除分支</span>
+$ <span class="token function">git</span> branch -d dev</code></pre>
+
+<h2 id="冲突解决"><a href="#冲突解决" class="headerlink" title="冲突解决"></a>冲突解决</h2><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 合并分支时出现冲突，变化会保存当前分支</span>
+$ <span class="token function">git</span> merge fearture1
+
+<span class="token comment"># 解决冲突后</span>
+$ <span class="token function">git</span> <span class="token function">add</span>
+$ <span class="token function">git</span> commit
+
+<span class="token comment"># 解决完成，合并成功，查看一下</span>
+$ <span class="token function">git</span> log --graph
+
+<span class="token comment">## 禁用fast forward，fast forward是直接修改当前指针跳转，看不出来曾经做过合并，禁用会在当前分支新增一个commit</span>
+$ <span class="token function">git</span> merge --no-ff -m <span class="token string">"merge with no-ff"</span> dev</code></pre>
+
+<h2 id="BUG分支，feature分支"><a href="#BUG分支，feature分支" class="headerlink" title="BUG分支，feature分支"></a>BUG分支，feature分支</h2><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 保存 Saved working directory and index state WIP</span>
+$ <span class="token function">git</span> stash
+
+$ <span class="token function">git</span> stash list
+
+<span class="token comment"># 恢复指定的</span>
+$ <span class="token function">git</span> stash apply stash@<span class="token punctuation">&#123;</span><span class="token number">0</span><span class="token punctuation">&#125;</span>
+<span class="token comment"># 删除stash内容</span>
+$ <span class="token function">git</span> stash pop stash@<span class="token punctuation">&#123;</span><span class="token number">0</span><span class="token punctuation">&#125;</span>
+
+<span class="token comment"># 在当前分支应用某个commit</span>
+$ <span class="token function">git</span> cherry-pick <span class="token operator">&lt;</span>commit<span class="token operator">></span>
+</code></pre>
+
+<h2 id="多人开发"><a href="#多人开发" class="headerlink" title="多人开发"></a>多人开发</h2><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 关联本地新建dev分支到远程的dev分支</span>
+$ <span class="token function">git</span> checkout -b dev origin/dev
+
+<span class="token comment"># 有人提交后，与本地有冲突，需要先pull，在本地merge，解决冲突，在推送</span>
+$ <span class="token function">git</span> branch --set-upstream-to<span class="token operator">=</span>origin/<span class="token operator">&lt;</span>branch-name<span class="token operator">></span> <span class="token operator">&lt;</span>branch-name<span class="token operator">></span>
+
+<span class="token comment"># 本地两次提交，pull下来一次提高，将本地未push的分叉提交历史拉直</span>
+$ <span class="token function">git</span> rebase</code></pre>
+
+<h2 id="tag"><a href="#tag" class="headerlink" title="tag"></a>tag</h2><p>tag就是某个commit，不过commitID不好记住，且无意义</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> tag v1.0
+$ <span class="token function">git</span> tag
+$ <span class="token function">git</span> tag v0.9 f52c633
+$ <span class="token function">git</span> show <span class="token operator">&lt;</span>tagname<span class="token operator">></span>
+<span class="token comment"># -a指定标签名字，-m指定说明文字</span>
+$ <span class="token function">git</span> tag -a v0.1 -m <span class="token string">"version 0.1 released"</span> 1094adb
+
+$ <span class="token function">git</span> tag -d v0.1
+$ <span class="token function">git</span> push origin v1.0
+$ <span class="token function">git</span> push origin --tags
+
+<span class="token comment"># 删除远程标签</span>
+$ <span class="token function">git</span> tag -d v0.9
+$ <span class="token function">git</span> push origin :refs/tags/v0.9</code></pre>
+
+<h2 id="git个性化定制"><a href="#git个性化定制" class="headerlink" title="git个性化定制"></a>git个性化定制</h2><pre class="language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> config --global color.ui <span class="token boolean">true</span></code></pre>
+
+<p>创建.gitignore</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/github/gitignore">gitignore配置</a></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> check-ignore -v App.class
+.gitignore:3:*.class	App.class
+<span class="token comment"># 不排除.gitignore和App.class:</span>
+<span class="token operator">!</span>.gitignore
+<span class="token operator">!</span>App.class</code></pre>
+
+
+</div></section><div id="reward-container"><span class="hty-icon-button button-glow" id="reward-button" title="打赏" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === &quot;none&quot;) ? &quot;block&quot; : &quot;none&quot;;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-hand-coin-line"></use></svg></span><div id="reward-comment">I'm so cute. Please give me money.</div></div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>Peng Xie</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="https://love1angel.github.io/2022/03/21/Git/" title="Git">https://love1angel.github.io/2022/03/21/Git/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><svg class="icon"><use xlink:href="#icon-creative-commons-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-by-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-nc-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-sa-line"></use></svg></a> 许可协议。</li></ul></article><div class="post-nav"><div class="post-nav-item"></div><div class="post-nav-item"><a class="post-nav-next" href="/2022/03/19/Markdown/" rel="next" title="Markdown"><span class="post-nav-text">Markdown</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-right-s-line"></use></svg></a></div></div></div><div class="hty-card" id="comment"></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2019 – 2022 </span><span class="with-love" id="animate"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-cloud-line"></use></svg></span><span class="author"> Peng Xie</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v6.1.0</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.8.10</span></div></footer><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-up-s-line"></use></svg><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a></div></body></html>
