@@ -15,7 +15,7 @@ sudo docker run -it --name test ubuntu
 在容器中
 
 ``` shell
-apt update && apt install -y build-essential vim gdb less
+cd ~ && apt update && apt install -y build-essential vim gdb less
 ```
 
 vim main.c，编写 main.c 源文件
@@ -30,7 +30,9 @@ int main(void)
 }
 ```
 
-## 反汇编 main 可执行程序
+gcc -g main.c -o main
+
+## 读取 main 可执行程序
 
 ``` text
 root@479c0e77cdf2:~# readelf -h main
@@ -56,13 +58,13 @@ ELF Header:
   Section header string table index: 30
 ```
 
-请注意 Entry point address 的地址为 0x1060，也就是可执行文件的第一行指令。记住该地址，下面会用到
+请注意 Entry point address 的地址为 0x1060，程序入口地址
 
 ``` shell
 objdump -D main |less
 ```
 
-查找可得
+查找程序入口地址 1060，可以看到如下
 
 ``` assembly
 Disassembly of section .text:
@@ -83,13 +85,11 @@ Disassembly of section .text:
     1085:       f4                      hlt
     1086:       66 2e 0f 1f 84 00 00    cs nopw 0x0(%rax,%rax,1)
     108d:       00 00 00
-```
 
-发现反汇编中和 main 相关的 label 为 _start，和 GLIBC_2.34 动态库中的桩地址
+0000000000001140 <frame_dummy>:
+    1140:       f3 0f 1e fa             endbr64
+    1144:       e9 77 ff ff ff          jmp    10c0 <register_tm_clones>
 
-_start 的地址 0000000000001060，main 函数的地址如下 0000000000001149
-
-``` assembly
 0000000000001149 <main>:
     1149:       f3 0f 1e fa             endbr64
     114d:       55                      push   %rbp
@@ -102,20 +102,36 @@ _start 的地址 0000000000001060，main 函数的地址如下 0000000000001149
     1166:       c3                      ret
 ```
 
-我们不难发现 _start 主要将 main 函数的地址传入寄存器中，并在 glibc-6 中用到了该地址，所以我们需要安装 glibc-6 源码一探动态库里究竟做了什么
+1. _start 的地址 0000000000001060
+2. main 函数实现的地址如下 0000000000001149
+3. __libc_start_main 为 glibc 动态库的桩代码
+
+我们逐步分析 _start 主要做了什么
+
+1060 启用 RAI (Return Address Indirection) 技术
+1064 清零 ebp 基址寄存器
+1066 将通用寄存器 rdx 拷贝到 r9 中
+1069 从栈上 pop 一个值给 rsi
+106a 栈顶指针 rsp 拷到 rdx 中
+106d rsp 和 16 字节向下对齐
+1071 push rax
+1072 push rsp
+1073 清零 r8d
+1076 清零 rcx
+1078 rdi 的值为 rip + 0xca
+107f 跳到 0x2f53 + rip 的地址
+
+很难看明白，还是用 gdb 看 glibc 到底做了什么
 
 ## 安装 glibc-6
 
 以下我们可以发现 main 被链接到 glibc-6 的版本
 
 ``` shell
-root@2f211165438e:/# gcc main.c -o main
-root@2f211165438e:/# ./main
-hello, world
-root@2f211165438e:/# ldd main
-        linux-vdso.so.1 (0x00007fff7f3f1000)
-        libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007fb59a074000)
-        /lib64/ld-linux-x86-64.so.2 (0x00007fb59a290000)
+root@479c0e77cdf2:~# ldd main
+	linux-vdso.so.1 (0x00007ffeb53c7000)
+	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f79e99b7000)
+	/lib64/ld-linux-x86-64.so.2 (0x00007f79e9bea000)
 ```
 
 为了更近一步分析，我们需要 glibc-6 的源码，下载源码或者在 /etc/apt/sources.list.d/ubuntu.sources 添加以下内容
@@ -139,36 +155,35 @@ apt update && apt source libc6
 编写 .gdbinit 文件，填源文件搜索路径
 
 ``` gdb
-dir /glibc-2.39
+dir ~/glibc-2.39
+b _start
+r
 ```
 
 gdb main -x .gdbinit
 
 ``` gdb
-(gdb) b __libc_start_main
-Function "__libc_start_main" not defined.
-Make breakpoint pending on future shared library load? (y or [n]) y
-Breakpoint 1 (__libc_start_main) pending.
-(gdb) r
-Starting program: /main 
-warning: Error disabling address space randomization: Operation not permitted
-[Thread debugging using libthread_db enabled]
-Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+b _dl_start_user
+b _dl_init
+b call_init
+b _init_first
+b __init_misc
+b __libc_start_main_impl
+b __libc_start_call_main
 
-Breakpoint 1, __libc_start_main_impl (main=0x55c48a497149 <main>, argc=1, argv=0x7ffee2997f08, init=0x0, 
-    fini=0x0, rtld_fini=0x7f881795c380 <_dl_fini>, stack_end=0x7ffee2997ef8) at ../csu/libc-start.c:242
-242     {
-(gdb) bt
-#0  __libc_start_main_impl (main=0x55c48a497149 <main>, argc=1, argv=0x7ffee2997f08, init=0x0, fini=0x0, 
-    rtld_fini=0x7f881795c380 <_dl_fini>, stack_end=0x7ffee2997ef8) at ../csu/libc-start.c:242
-#1  0x000055c48a497085 in _start ()
 ```
+
+_dl_start_user 是 ld 动态库
 
 ## 分析
 
-1. 先调用 _start ()
-2. 在调用 __libc_start_main_impl
-3. 最后调用 main 函数
+_init_first
+
+__init_misc
+
+__libc_start_main_impl
+
+__libc_start_call_main
 
 ## 这三个函数都做了什么呢？
 
