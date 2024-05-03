@@ -1,10 +1,17 @@
 ---
 title: capi
-date: 2024-04-29 21:51:45
+date: 2022-04-06 10:47:33
+categories:
+- ethernet
+- some/ip
 tags:
+- midware
 ---
 
-# install
+
+本文主要介绍车载以太网的 CommonAPI 的应用
+
+<!-- more -->
 
 [user guide links](https://usermanual.wiki/Document/CommonAPICppUserGuide.1126244679/view)
 
@@ -16,11 +23,12 @@ the step 1 need to install boost library first like following
 
 ```bash
 $ sudo apt-get install libboost-all-dev
-
 ```
 
 1. [vsomeip](https://github.com/COVESA/vsomeip)
+
 2. [capicxx-core-runtime](https://github.com/GENIVI/capicxx-core-runtime)
+
 3. [capicxx-someip-runtime](https://github.com/GENIVI/capicxx-someip-runtime)
 
 ## code generate tools
@@ -29,10 +37,10 @@ this code generate tools depend on Java environment
 
 ```bash
 $ sudo apt-get install openjdk-17-jdk
-
 ```
 
 1. [CommonAPI core header generate](https://github.com/GENIVI/capicxx-core-tools)
+
 2. [CommonAPI source code generate](https://github.com/GENIVI/capicxx-someip-tools)
 
 # run helloworld
@@ -81,9 +89,9 @@ $ sudo apt-get install openjdk-17-jdk
 
 ```
 
-1. HelloWorld.fidl
+2. HelloWorld.fidl
 
-```
+```text
 package commonapi
 interface HelloWorld {
   version {major 1 minor 0}
@@ -96,12 +104,11 @@ interface HelloWorld {
     }
   }
 }
-
 ```
 
-1. HelloWorld.fdepl
+3. HelloWorld.fdepl
 
-```
+```text
 import "platform:/plugin/org.genivi.commonapi.someip/deployment/CommonAPI-SOMEIP_deployment_spec.fdepl"
 import "HelloWorld.fidl"
 define org.genivi.commonapi.someip.deployment for interface commonapi.HelloWorld {
@@ -118,7 +125,6 @@ define org.genivi.commonapi.someip.deployment for provider as MyService {
         SomeIpInstanceID = 2200
     }
 }
-
 ```
 
 ## then generate code
@@ -126,7 +132,6 @@ define org.genivi.commonapi.someip.deployment for provider as MyService {
 ```bash
 # ➜  helloworld ../commonapi_core_generator/commonapi-core-generator-linux-x86_64 -sk ./fidl/HelloWorld.fidl
 ➜  helloworld ../commonapi_someip_generator/commonapi-someip-generator-linux-x86_64 -ll verbos ./fidl/HelloWorld.fdepl
-
 ```
 
 ## write your code
@@ -151,7 +156,7 @@ public:
 
 ```
 
-1. HelloWorldStubImpl.cpp
+2. HelloWorldStubImpl.cpp
 
 ```cpp
 #include "HelloWorldStubImpl.hpp"
@@ -162,14 +167,13 @@ HelloWorldStubImpl::~HelloWorldStubImpl() { }
 void HelloWorldStubImpl::sayHello(const std::shared_ptr<CommonAPI::ClientId> _client, std::string _name, sayHelloReply_t _reply) {
     std::stringstream messageStream;
     messageStream << "Hello " << _name << "!";
-    std::cout << "sayHello('" << _name << "'): '" << messageStream.str() << "'\\n";
+    std::cout << "sayHello('" << _name << "'): '" << messageStream.str() << "'\n";
 
     _reply(messageStream.str());
 };
-
 ```
 
-1. HelloWorldService.cpp
+3. HelloWorldService.cpp
 
 ```cpp
 #include <iostream>
@@ -196,7 +200,7 @@ int main() {
 
 ```
 
-1. HelloWorldClient.cpp
+4. HelloWorldClient.cpp
 
 ```cpp
 #include <iostream>
@@ -220,19 +224,19 @@ int main() {
     CommonAPI::CallStatus callStatus;
     std::string returnMessage;
 
+
     while (true) {
         std::this_thread::sleep_for(std::chrono::seconds(1));
         myProxy->sayHello("xiepeng", callStatus, returnMessage);
-        std::cout << "Got message: '" << returnMessage << "'\\n";
+        std::cout << "Got message: '" << returnMessage << "'\n";
     }
     return 0;
 }
-
 ```
 
-1. cmake
+5. cmake
 
-```
+```cmake
 cmake_minimum_required(VERSION 2.8)
 
 project(helloworld)
@@ -273,5 +277,7 @@ target_link_libraries(HelloWorldService CommonAPI CommonAPI-SomeIP vsomeip3)
 # 踩的几个坑
 
 1. fidl 文件高版本有变动 ～～define org.genivi.commonapi.someip.deployment for provider MyService {～～应该为 define org.genivi.commonapi.someip.deployment for provider as MyService {
+
 2. sudo ldconfig 会报 Configuration module could not be loaded! 其实是动态库的问题
+
 3. vsomeip ld 找不到，高版本 cmake 要链接 vsomeip3

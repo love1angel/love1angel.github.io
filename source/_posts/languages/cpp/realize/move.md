@@ -1,14 +1,20 @@
 ---
 title: std::move 到底做了什么？C++ 移动到底是什么？move 后的对象还可以使用吗？
 date: 2024-05-02 08:35:01
+categories:
+- languages
+- cpp
+- realize
 tags:
+- cpp
 ---
 
 最近几天听到了一些对 C++ 不太对的看法，如下：
 1. move 后的对象不能用了
-2. move 移动了 C++ 对象的所有权，所以原本的对象不能再使用了
+2. 因为 move 移动了 C++ 对象的所有权，所以原本的对象不能再使用了
 3. 函数返回值 T 类型时候 return std::move(T {});
 
+<!-- more -->
 
 本文暂时不考虑 pod 类型，pod 类型的做法通常直接进行拷贝。所以基于 class T 类型进行讨论：
 

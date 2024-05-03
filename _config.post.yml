@@ -1,0 +1,20 @@
+widgets:
+    -
+        type: recent_posts
+        position: right
+    -
+        type: categories
+        position: left
+    -
+        type: tags
+        position: left
+
+sidebar:
+    # Left sidebar configurations
+    left:
+        # Whether the sidebar sticks to the top when page scrolls
+        sticky: false
+    # Right sidebar configurations
+    right:
+        # Whether the sidebar sticks to the top when page scrolls
+        sticky: false

@@ -1,8 +1,15 @@
 ---
 title: main 函数的启动流程
 date: 2024-04-29 21:53:08
+categories:
+- linux
 tags:
+- linux
 ---
+
+本文简单探讨一下 main 函数的启动流程
+
+<!-- more -->
 
 ## 环境搭建
 
