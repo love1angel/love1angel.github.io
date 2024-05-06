@@ -2,10 +2,105 @@
 title: Docker
 date: 2022-03-18 23:16:59
 categories:
+- tools
 tags:
 ---
 
-# Docker
+本文主要记录 Docker 常用命令。
+
+<!-- more -->
+
+
+## 新建容器
+
+``` shell
+sudo docker run -it --name my-ubuntu-container ubuntu:20.04 /bin/bash
+```
+exit 容器会退出运行
+
+- -d 参数后台运行
+- --rm 退出后自动删除容器
+
+## 删除容器
+``` shell
+sudo docker rm my-ubuntu-container
+```
+
+## 查看容器
+
+``` shell
+# 查看运行的容器
+sudo docker ps
+# 查看所有包括退出的容器
+sudo docker ps -a
+```
+
+## 退出容器
+### 继续运行
+
+Ctrl + P
+Ctrl + Q
+
+``` shell
+# 启动容器
+sudo docker start my-ubuntu-container
+# 查看所有包括退出的容器
+sudo docker exec -it my-ubuntu-container /bin/bash
+```
+
+### 直接退出
+
+``` shell
+# 启动容器
+sudo docker start my-ubuntu-container
+# 查看所有包括退出的容器
+sudo docker attach my-ubuntu-container
+```
+
+equals
+
+``` shell
+sudo docker start -i my-ubuntu-container
+```
+
+## 启用外部代理
+
+查看宿主机 ip 地址
+``` shell
+export proxy_ip=192.168.5.38;
+export https_proxy=http://$proxy_ip:7890;export http_proxy=http://$proxy_ip:7890;export all_proxy=socks5://$proxy_ip:7890
+```
+
+## Dockerfile 构建 image
+
+根据 Dockerfile 构建
+``` shell
+sudo docker build -t my_proxy_container .
+sudo docker run -it --rm my_proxy_container
+```
+
+``` Dockerfile
+FROM ubuntu:latest
+
+ENV PROXY_IP=192.168.5.38
+ENV PROXY_PORT=7890
+ENV http_proxy=http://$PROXY_IP:$PROXY_PORT
+ENV https_proxy=http://$PROXY_IP:$PROXY_PORT
+ENV all_proxy=socks5://$PROXY_IP:$PROXY_PORT
+
+RUN apt update && apt install -y build-essential gcc make perl dkms git gcc-riscv64-unknown-elf gdb-multiarch qemu-system-misc
+
+WORKDIR /root
+
+RUN git clone https://github.com/plctlab/riscv-operating-system-mooc.git
+
+# 在容器启动时执行的命令
+CMD ["bash"]
+```
+
+---
+
+formal
 
 1. C-S 架构，C 端为 Docker 或者 Docker Compose，S 端为 Docker daemon
 
