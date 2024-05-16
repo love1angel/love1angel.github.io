@@ -10,78 +10,32 @@ tags:
 
 <!-- more -->
 
+## images
 
-## 新建容器
+### pull
 
 ``` shell
-sudo docker run -it --name my-ubuntu-container ubuntu:20.04 /bin/bash
-```
-exit 容器会退出运行
-
-- -d 参数后台运行
-- --rm 退出后自动删除容器
-
-## 删除容器
-``` shell
-sudo docker rm my-ubuntu-container
+docker pull ubuntu:latest
 ```
 
-## 查看容器
+### remove
+
+一定要删除正在运行的容器
 
 ``` shell
-# 查看运行的容器
-sudo docker ps
-# 查看所有包括退出的容器
-sudo docker ps -a
+docker rmi plctlab
 ```
 
-## 退出容器
-### 继续运行
-
-Ctrl + P
-Ctrl + Q
+### build images by Dockerfile
 
 ``` shell
-# 启动容器
-sudo docker start my-ubuntu-container
-# 查看所有包括退出的容器
-sudo docker exec -it my-ubuntu-container /bin/bash
-```
-
-### 直接退出
-
-``` shell
-# 启动容器
-sudo docker start my-ubuntu-container
-# 查看所有包括退出的容器
-sudo docker attach my-ubuntu-container
-```
-
-equals
-
-``` shell
-sudo docker start -i my-ubuntu-container
-```
-
-## 启用外部代理
-
-查看宿主机 ip 地址
-``` shell
-export proxy_ip=192.168.5.38;
-export https_proxy=http://$proxy_ip:7890;export http_proxy=http://$proxy_ip:7890;export all_proxy=socks5://$proxy_ip:7890
-```
-
-## Dockerfile 构建 image
-
-根据 Dockerfile 构建
-``` shell
-sudo docker build -t my_proxy_container .
-sudo docker run -it --rm my_proxy_container
+sudo docker build -t plctlab .
 ```
 
 ``` Dockerfile
 FROM ubuntu:latest
 
+# 根据宿主机的 ip 来决定
 ENV PROXY_IP=192.168.5.38
 ENV PROXY_PORT=7890
 ENV http_proxy=http://$PROXY_IP:$PROXY_PORT
@@ -96,6 +50,55 @@ RUN git clone https://github.com/plctlab/riscv-operating-system-mooc.git
 
 # 在容器启动时执行的命令
 CMD ["bash"]
+```
+
+## container
+
+### 新建
+
+``` shell
+docker run -it --name my-ubuntu ubuntu:latest /bin/bash
+docker run -it --name my-ubuntu ubuntu:20.04 /bin/bash
+```
+
+exit 后容器会退出运行
+
+- -d 后台运行
+- --rm 退出后自动删除容器
+
+### 删除
+
+``` shell
+docker rm my-ubuntu
+```
+
+### 查看
+
+``` shell
+# 查看运行的容器
+docker ps
+# 查看所有包括退出的容器
+docker ps -a
+```
+
+### 继续运行
+
+``` shell
+docker start my-ubuntu
+docker exec -it my-ubuntu /bin/bash
+```
+
+### attach 容器
+
+``` shell
+sudo docker start my-ubuntu
+sudo docker attach my-ubuntu
+```
+
+equals
+
+``` shell
+sudo docker start -i my-ubuntu
 ```
 
 ---
