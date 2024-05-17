@@ -2,10 +2,11 @@
 title: terminology
 date: 2024-05-16 02:59:59
 categories:
+- terminology
 tags:
 ---
 
-常用术语
+常用术语。车载领域
 
 <!-- more -->
 

@@ -2,10 +2,78 @@
 title: Git
 date: 2022-03-21 13:58:03
 categories:
+- tools
 tags:
 ---
 
-# git使用
+本文主要记录 git 使用。submodule
+
+<!-- more -->
+
+## 正常使用
+
+origin 为代号，可以随意取
+
+``` shell
+# https 方式
+git remote add origin https://github.com/love1angel/testgit.git
+# ssh 方式
+git remote add origin git@github.com:love1angel/testgit.git
+```
+
+## submodule 使用
+
+### 创建
+
+``` shell
+mkdir 3rdparty
+cd 3rdparty
+git submodule add https://github.com/google/googletest.git
+```
+
+### 下载
+
+``` shell
+git submodule init
+git submodule update --recursive
+```
+
+### 查看状态
+
+``` shell
+# 正常下载好的状态
+git submodule status
+ 33af80a883ddc33d9c0fac0a5b4578301efb18de 3rdparty/googletest (release-1.8.0-3471-g33af80a8)
+
+# 如果没有下好，带 -
+git submodule status
+-2954cb8d879886403d55343f941ae7d0216e0f6b 3rdparty/googletest
+
+# 有更新，带 +
+git submodule status
++33af80a883ddc33d9c0fac0a5b4578301efb18de 3rdparty/googletest (release-1.8.0-3471-g33af80a8)
+```
+
+### 更新
+
+``` shell
+# 更新总仓库目前的分支，引用
+git remote update
+
+# 更新到总仓库
+git submodule update --recursive
+
+# 更新子仓库到最新的提交
+git submodule update --remote
+# 更新单个仓库
+git submodule update --remote 3rdparty/googletest
+```
+
+---
+
+## before no use
+
+## git使用
 
 ## 目的：Linus为了管理Linux源码用C语言开发的分布式版本控制系统
 
