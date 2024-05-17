@@ -1,5 +1,5 @@
 ---
-title: Git
+title: git
 date: 2022-03-21 13:58:03
 categories:
 - tools
