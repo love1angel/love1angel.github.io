@@ -1,14 +1,12 @@
 ---
-title: gdb-1
+title: gdb debug 情形讨论一
 date: 2024-05-21 07:59:59
 categories:
 - gdb
 tags:
 ---
 
-gdb 常见情形。
-
-- 断在特定情形下
+- 断在变量特殊值下
 - 我的变量值被谁偷偷改了？
 
 <!-- more -->
