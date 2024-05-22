@@ -23,7 +23,7 @@ gdb 调试 cpp 数据结构的特殊情形
 # 查看元素值
 ## gcc
 (gdb) p (char *)str
-(gdb) p (char)str[0]
+(gdb) p str._M_dataplus._M_p[2]
 ```
 
 ## std::vector
