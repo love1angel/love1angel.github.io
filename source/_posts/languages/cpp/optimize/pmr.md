@@ -10,8 +10,8 @@ tags:
 
 C++ 17 引入了内存相关的一系列可重写的 API。 在头文件 memory_resource 中。命名空间在 std::pmr:: ，目的在于
 
-1. 池化内存分配，减少频繁系统调用分配或释放内存，导致性能损失
-2. 与已有 std 中的 allocator, container 结合，方便使用者自定义相关的内存分配策略
+1. 池化内存分配，减少频繁系统调用分配或释放内存，带来的性能损失
+2. 与已有 std 中的 allocator, container 结合，方便使用者自定义相关的内存分配策略类
 
 <!-- more -->
 
@@ -28,7 +28,7 @@ C++ 17 引入了内存相关的一系列可重写的 API。 在头文件 memory_
 3. std::pmr::synchronized_pool_resource
 @love1angel
 
-获取默认的内存分配策略，不修改则是一层封装了 new 和 delete 的继承自 memory_resource 的类（clang++ 下为 __new_delete_memory_resource_imp）
+获取默认的内存分配策略类，不修改则是使用继承自 memory_resource 的类（clang++ 下为 __new_delete_memory_resource_imp），其中的方法最终就是调用了 new 和 delete 
 std::pmr::get_default_resource()
 
 设置默认的内存分配策略类
@@ -42,7 +42,7 @@ std::pmr::null_memory_resource()
 
 ## std 库封装的接口
 
-封装了 polymorphic_allocator 帮我们满足了 std 容器中需要满足的条件，如定义了 value_type，operaotr== 比较两个分配器是否相等。
+封装了 polymorphic_allocator 满足了 std 容器中需要满足的条件，如定义了 value_type，operaotr== 比较两个分配器是否相等。
 
 封装了一些数据结构，如std::pmr::vector<T> 实际上是 std::list<T, std::pmr::polymorphic_allocator<T>>
 
