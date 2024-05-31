@@ -6,27 +6,25 @@ categories:
 tags:
 ---
 
-本文主要记录 Docker 常用命令。
+docker cheatsheet
 
 <!-- more -->
 
 ## images
 
-### pull
+pull image
 
 ``` shell
 docker pull ubuntu:latest
 ```
 
-### remove
-
-一定要删除正在运行的容器
+remove image, must delete containers use this image
 
 ``` shell
 docker rmi plctlab
 ```
 
-### build images by Dockerfile
+build image by Dockerfile
 
 ``` shell
 sudo docker build -t plctlab .
@@ -35,7 +33,7 @@ sudo docker build -t plctlab .
 ``` Dockerfile
 FROM ubuntu:latest
 
-# 根据宿主机的 ip 来决定
+# proxy settings according to the host ip and port
 ENV PROXY_IP=192.168.5.38
 ENV PROXY_PORT=7890
 ENV http_proxy=http://$PROXY_IP:$PROXY_PORT
@@ -48,13 +46,13 @@ WORKDIR /root
 
 RUN git clone https://github.com/plctlab/riscv-operating-system-mooc.git
 
-# 在容器启动时执行的命令
+# execute when container start
 CMD ["bash"]
 ```
 
 ## container
 
-### 新建
+create container
 
 ``` shell
 docker run -it --name my-ubuntu ubuntu:latest /bin/bash
@@ -100,6 +98,10 @@ equals
 ``` shell
 sudo docker start -i my-ubuntu
 ```
+
+### port mapping(\<host port>:\<container port>), file volume(\<host directory>:\<container directory>)
+
+docker run -it -p 8999:4000 -v ~/arch:/root/host --name heli archlinux /bin/bash
 
 ---
 

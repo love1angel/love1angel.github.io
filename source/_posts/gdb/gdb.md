@@ -10,54 +10,98 @@ gdb cheatsheet
 
 <!-- more -->
 
-## docs
-
-https://developer.apple.com/library/archive/documentation/DeveloperTools/gdb/gdb/gdb_6.html
-https://sourceware.org/gdb/onlinedocs/gdb/
-
-编译时需要增加 -g 参数，control + l 进行刷新
-
 ## common
 
-设置默认命令，gdb 启动后自动执行
+### usage
+
+1. add -g option when compile
+2. <Ctrl + l> refresh window
+
+### docs
+
+> 1. https://sourceware.org/gdb/onlinedocs/gdb/
+> 2. https://developer.apple.com/library/archive/documentation/DeveloperTools/gdb/gdb/gdb_6.html
+
+### set gdb auto run commands when execute gdb
 
 gdb main -x .gdbinit
 
-```cpp
+write .gdbinit like this
+
+``` text
 b main.c:4
 r
 p c
 ```
 
-[start] 开始从 main 断点执行
+### gdb command
 
-[b] 打断点 break point
+`file main`: read file main's symbol
 
-[c] 继续 continue
+`start`: enter main function and break
 
-[n] 下一步 next
+`b <line number, function name>`, `breakpoint`: add break point
 
-[s] 进入查看 step into
+`c`: continue run
 
-[list] 查看部分源码
+`n`: next step
 
-[p var] 打印 var 变量的值，信息，或者表达式运算结果
+`s`: step into
 
-[bt] 打印栈信息，backtrace
+`list`: list current running several lines
 
-[info breakpoints] 查看 break point 的信息
+`p <variable name, expression>`: print variable values, expression values
 
-[info locals] 查看局部变量
+`bt`: print back trace, function call stack information
 
-[info proc map]
+---
 
-## crash 调试
+`info breakpoints`: print break points information
 
-## 生成 coredump 文件
+`info locals`: print local variable values
 
-```bash
-# 默认不生成 coredump 文件，大小为 0
-$ ulimit -a
+`info proc map`: program memory map @todo
+
+---
+
+`help layout`: check layout related command
+`layout split`: split layout in different window
+`layout src`: show source window
+`layout asm`: show assemble window
+`layout regs`: show registers window
+
+## debug when running
+
+`ps -elf | grep <executable file>`
+`gdb attach <pid>`
+
+## debug in cross compile environment
+
+`set sysroot /opt/cross/sysroots/aarch64-poky-linux`: set the path of your cross compile system root
+
+### use gdbserver debug remotely or in different arch
+
+@todo
+
+## debug when crash using coredump
+
+we need three things before debugging
+
+1. executable file
+2. coredump file
+3. sdk when cross compile environment
+
+### generate coredump file, take `Ubuntu` environment as an example
+
+Ubuntu default configuration(ulimit -c equal 0) will not generate coredump file. we can check by running this command
+
+``` bash
+ulimit -a
+```
+
+output:
+
+``` text
 -t: cpu time (seconds)              unlimited
 -f: file size (blocks)              unlimited
 -d: data seg size (kbytes)          unlimited
@@ -74,50 +118,41 @@ $ ulimit -a
 -e: max nice                        0
 -r: max rt priority                 0
 -N 15:                              unlimited
-
-# 修改 -c 为 unlimited
-$ ulimit -c unlimited
-
-# 查看 coredump 文件格式
-$ cat /proc/sys/kernel/core_pattern
-|/usr/share/apport/apport -p%p -s%s -c%c -d%d -P%P -u%u -g%g -- %E
-
-# 改变生成的位置
-$ sysctl -w kernel.core_pattern=/tmp/core_%e_%p
-
-# 调试
-$ gdb ~/main -c /tmp/core_main_1859038
 ```
 
-### 读取 core 文件
+then we can change ulimit -c temporarily. **only take effect in the current running shell**
 
-[gdb main -c .core] 读取 core 文件
+``` shell
+ulimit -c unlimited
+```
 
-## 通用读取配置
+### then system will generate coredump file when program crash, but where will we get this file?
 
-[file main] 读取 main 的 symbol
+we can check this
 
-### 交叉编译工具链
+``` shell
+cat /proc/sys/kernel/core_pattern
+```
 
-[set sysroot /opt/cross/sysroots/aarch64-poky-linux] 设置系统路径，不确定
+default setting is here. system will execute apport program report remote when coredump. the coredump file is in the directory `/var/lib/apport/coredump/`, you can find according to the executable file name, timestamp and so on.
 
-## layout
+``` text
+|/usr/share/apport/apport -p%p -s%s -c%c -d%d -P%P -u%u -g%g -- %E
+```
 
-`help layout` 帮助
+we can change coredump output path by using this command.
 
-`layout split` 分开 src asm cmd
+``` shell
+sysctl -w kernel.core_pattern=/tmp/core_%e_%p
+```
 
-`layout src` 新增源码查看窗口
-`layout asm` 新增汇编查看窗口
-`layout regs` 查看寄存器
+debug command
 
-## 常用命令
+``` shell
+gdb ~/main -c /tmp/core_main_1859038
+```
 
-`list` 查看部分源码
-
-## break point
-
-可以打在函数（展开很难看），文件行号上
+## break point in practice
 
 ``` txt
 (gdb) b main
@@ -127,7 +162,7 @@ Breakpoint 1 at 0x243d: file test.cpp, line 57.
 Breakpoint 2 at 0x2c6c: file test.cpp, line 35.
 ```
 
-删除
+delete break point
 
 ``` txt
 (gdb) info breakpoints
@@ -142,7 +177,7 @@ Num     Type           Disp Enb Address            What
 2       breakpoint     keep y   0x0000000000002c6c in Solution::minWindow(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) at test.cpp:35
 ```
 
-watch point 也是一种 break point
+watch point is also a break point
 
 `watch` command is used to set a watchpoint for writing
 

@@ -12,6 +12,7 @@ C++ 17 引入了内存相关的一系列可重写的 API。 在头文件 memory_
 
 1. 池化内存分配，减少频繁系统调用分配或释放内存，带来的性能损失
 2. 与已有 std 中的 allocator, container 结合，方便使用者自定义相关的内存分配策略类
+3. 特殊的使用场景：内存分配效率敏感、需要禁用内存分配。如因功能安全需要，自动驾驶代码禁止动态内存分配
 
 <!-- more -->
 
@@ -53,10 +54,10 @@ std::pmr::set_default_resource(memory_resource*)
 
 ``` cpp
 template <typename F, typename... Args>
-void calc(F f, Args... args)
+void calc(F f, Args&&... args)
 {
     auto before = std::chrono::steady_clock::now();
-    f(args...);
+    f(std::forward<Args>(args)...);
     auto after = std::chrono::steady_clock::now();
 
     std::chrono::duration<double> duration = after - before;
@@ -110,7 +111,7 @@ int main()
 
 ## 实现解析，以 clang++ 为例
 
-monotonic_buffer_resource 单调递减
+monotonic_buffer_resource 是一个链表，每个节点是单调递减的
 
 ![monotonic_buffer_resource 实现](https://github.com/love1angel/love1angel.github.io/blob/hexo/source/_posts/languages/cpp/optimize/pmr_pict_1.svg?raw=true)
 

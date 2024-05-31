@@ -6,17 +6,20 @@ categories:
 tags:
 ---
 
-本文主要记录 tmux 使用。
+tmux cheatsheet
 
 <!-- more -->
 
 ## session
 
-新建 session，命名为 work
-`tmux new-session -s work`
+`tmux new-session -s <sesssion name>`: create new session, naming by -s
 
-分离当前 session
-`c-b d`
+`tmux detach`, `Ctrl + b, d`: detach current session
 
-attach 到当前 session
-`tmux attach -t work`
+`tmux attach -t <name, session number>`: attach to session name work
+
+## window
+
+`tmux new-window -n <window name>`: create new window, naming by -n
+
+`Ctrl + b, <window number>`: select window
