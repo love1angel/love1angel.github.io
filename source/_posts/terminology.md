@@ -126,3 +126,5 @@ forward compatibility 向前兼容，前瞻兼容。考虑未来还能不能用
 E2E: exchange to exchange
 
 E2E test: end to end test
+
+SMP (Symmetric multiprocessing) : 对称多处理

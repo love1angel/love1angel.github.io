@@ -30,3 +30,11 @@ rotation: 旋转
 translation: 平移
 
 Geometry: 几何学
+
+
+degree: 方向盘转向角度
+velocity: 速度
+
+acceleration: 加速度
+    - lateral direction: 横向
+    - longitudinal direction: 纵向
