@@ -7,7 +7,7 @@ tags:
 - done
 ---
 
-ELF(Executable and Linkable Format)
+ELF (Executable and Linkable Format)
 
 <!-- more -->
 
@@ -29,13 +29,13 @@ An ELF file has two views:
     readelf -lW main
     ```
 
-2. the section header tables lists the set of sections. (ld view)
+2. the section header tables lists the set of sections. (link view)
 
     ``` bash
     readelf -SW main
     ```
 
-segment is Composed of several section with the same (memory flag view ???). save memory
+segment is composed of several section with the same (memory flag view ???). in order to save memory since memory alignment caused.
 
 ## symbol
 

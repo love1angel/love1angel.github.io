@@ -38,3 +38,13 @@ velocity: 速度
 acceleration: 加速度
     - lateral direction: 横向
     - longitudinal direction: 纵向
+
+quantized model: 量化模型
+fine tuning
+tunnels
+road cluster
+
+物体识别 2D, 3D
+物体跟踪
+物体检测
+语义分割
