@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>pmr - Helianthus&#039;s Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="helianthus&#039;s blog"><meta name="msapplication-TileImage" content="./img/avatar.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="helianthus&#039;s blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="C++ 17 引入了内存相关的一系列可重写的 API。 在头文件 memory_resource 中。命名空间在 std::pmr:: ，目的在于  池化内存分配，减少频繁系统调用分配或释放内存，带来的性能损失 与已有 std 中的 allocator, container 结合，方便使用者自定义相关的内存分配策略类 特殊的使用场景：内存分配效率敏感、需要禁用内存分配。如因功能安全需要，自动驾驶代"><meta property="og:type" content="blog"><meta property="og:title" content="pmr"><meta property="og:url" content="https://love1angel.github.io/2024/05/22/languages/cpp/optimize/pmr/"><meta property="og:site_name" content="Helianthus&#039;s Blog"><meta property="og:description" content="C++ 17 引入了内存相关的一系列可重写的 API。 在头文件 memory_resource 中。命名空间在 std::pmr:: ，目的在于  池化内存分配，减少频繁系统调用分配或释放内存，带来的性能损失 与已有 std 中的 allocator, container 结合，方便使用者自定义相关的内存分配策略类 特殊的使用场景：内存分配效率敏感、需要禁用内存分配。如因功能安全需要，自动驾驶代"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://github.com/love1angel/love1angel.github.io/blob/hexo/source/_posts/languages/cpp/optimize/pmr_1.png?raw=true"><meta property="og:image" content="https://github.com/love1angel/love1angel.github.io/blob/hexo/source/_posts/languages/cpp/optimize/pmr_pict_1.svg?raw=true"><meta property="article:published_time" content="2024-05-21T17:46:51.000Z"><meta property="article:modified_time" content="2024-06-24T07:36:26.089Z"><meta property="article:author" content="Helianthus"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://github.com/love1angel/love1angel.github.io/blob/hexo/source/_posts/languages/cpp/optimize/pmr_1.png?raw=true"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://love1angel.github.io/2024/05/22/languages/cpp/optimize/pmr/"},"headline":"pmr","image":[],"datePublished":"2024-05-21T17:46:51.000Z","dateModified":"2024-06-24T07:36:26.089Z","author":{"@type":"Person","name":"Helianthus"},"publisher":{"@type":"Organization","name":"Helianthus's Blog","logo":{"@type":"ImageObject","url":"https://love1angel.github.io/2024/05/22/languages/cpp/optimize/pmr/img/avatar.svg"}},"description":"C++ 17 引入了内存相关的一系列可重写的 API。 在头文件 memory_resource 中。命名空间在 std::pmr:: ，目的在于  池化内存分配，减少频繁系统调用分配或释放内存，带来的性能损失 与已有 std 中的 allocator, container 结合，方便使用者自定义相关的内存分配策略类 特殊的使用场景：内存分配效率敏感、需要禁用内存分配。如因功能安全需要，自动驾驶代"}</script><link rel="canonical" href="https://love1angel.github.io/2024/05/22/languages/cpp/optimize/pmr/"><link rel="icon" href="/./img/avatar.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.2.0"></head><body class="is-1-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/./img/avatar.svg" alt="Helianthus&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-12"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2024-05-21T17:46:51.000Z" title="5/22/2024, 1:46:51 AM">2024-05-22</time></span><span class="level-item">Updated&nbsp;<time dateTime="2024-06-24T07:36:26.089Z" title="6/24/2024, 3:36:26 PM">2024-06-24</time></span><span class="level-item"><a class="link-muted" href="/categories/languages/">languages</a><span> / </span><a class="link-muted" href="/categories/languages/cpp/">cpp</a><span> / </span><a class="link-muted" href="/categories/languages/cpp/optimize/">optimize</a></span><span class="level-item">7 minutes read (About 1060 words)</span></div></div><h1 class="title is-3 is-size-4-mobile">pmr</h1><div class="content"><p>C++ 17 引入了内存相关的一系列可重写的 API。 在头文件 memory_resource 中。命名空间在 std::pmr:: ，目的在于</p>
+<ol>
+<li>池化内存分配，减少频繁系统调用分配或释放内存，带来的性能损失</li>
+<li>与已有 std 中的 allocator, container 结合，方便使用者自定义相关的内存分配策略类</li>
+<li>特殊的使用场景：内存分配效率敏感、需要禁用内存分配。如因功能安全需要，自动驾驶代码禁止动态内存分配</li>
+</ol>
+<span id="more"></span>
+
+<p>标准库的主要结构如下</p>
+<p><img src="https://github.com/love1angel/love1angel.github.io/blob/hexo/source/_posts/languages/cpp/optimize/pmr_1.png?raw=true" alt="uml"></p>
+<p>memory_resource 为分配释放内存的管理类，allocator 和类型相关，向 memory_resource 索取内存，因此构造 allocator 时候需要传入 upstream 即 memory_resource 的指针</p>
+<h2 id="标准库实现的内存分配类"><a href="#标准库实现的内存分配类" class="headerlink" title="标准库实现的内存分配类"></a>标准库实现的内存分配类</h2><ol>
+<li>std::pmr::monotonic_buffer_resource</li>
+<li>std::pmr::unsynchronized_pool_resource</li>
+<li>std::pmr::synchronized_pool_resource</li>
+</ol>
+<p>获取默认的 new delete 内存分配策略，继承自 memory_resource。作为基准测试（clang++ 下为 __new_delete_memory_resource_imp）<br>std::pmr::new_delete_resource()</p>
+<p>分配内存调用 allocate 会直接抛出异常 std::bad_alloc()，通常用来禁止向 upstream 索要内存，从而禁止从默认的内存分配类索取内存<br>std::pmr::null_memory_resource()</p>
+<p>获取默认的内存分配策略类，不修改则为 new_delete_resource<br>std::pmr::get_default_resource()</p>
+<p>设置默认的内存分配策略类<br>std::pmr::set_default_resource(memory_resource*)</p>
+<h2 id="std-库封装的接口"><a href="#std-库封装的接口" class="headerlink" title="std 库封装的接口"></a>std 库封装的接口</h2><p>封装了 polymorphic_allocator 满足了 std 容器中需要满足的条件，如定义了 value_type，operaotr&#x3D;&#x3D; 比较两个分配器是否相等。</p>
+<p>封装了一些数据结构，如std::pmr::vector&lt;T&gt; 实际上是 std::list&lt;T, std::pmr::polymorphic_allocator&lt;T&gt;&gt;</p>
+<p>这时候可以直接给他传入你的 buf, std::pmr::list{&amp;upstream}; upstream 即 memory_resource 实现类，upstream 会传递给 allocator</p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>计时函数</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> F, <span class="keyword">typename</span>... Args&gt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">calc</span><span class="params">(F f, Args&amp;&amp;... args)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">auto</span> before = std::chrono::steady_clock::<span class="built_in">now</span>();</span><br><span class="line">    <span class="built_in">f</span>(std::forward&lt;Args&gt;(args)...);</span><br><span class="line">    <span class="keyword">auto</span> after = std::chrono::steady_clock::<span class="built_in">now</span>();</span><br><span class="line"></span><br><span class="line">    std::chrono::duration&lt;<span class="type">double</span>&gt; duration = after - before;</span><br><span class="line">    std::cout &lt;&lt; duration &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>优化 list</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">std::array&lt;std::byte, 65536 * 24&gt; buf;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">auto</span> list = [] &#123;</span><br><span class="line">        std::list&lt;<span class="type">int</span>&gt; list;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i &#123; <span class="number">0</span> &#125;; i &lt; <span class="number">65536</span>; ++i) &#123;</span><br><span class="line">            list.<span class="built_in">push_back</span>(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="built_in">calc</span>(list);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">auto</span> pmr_list = [] &#123;</span><br><span class="line">        std::pmr::monotonic_buffer_resource resouce &#123; buf.<span class="built_in">data</span>(), buf.<span class="built_in">size</span>() &#125;;</span><br><span class="line">        std::pmr::list&lt;<span class="type">int</span>&gt; list &#123; &amp;resouce &#125;;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i &#123; <span class="number">0</span> &#125;; i &lt; <span class="number">65536</span>; ++i) &#123;</span><br><span class="line">            list.<span class="built_in">push_back</span>(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="built_in">calc</span>(pmr_list);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">auto</span> vector = [] &#123;</span><br><span class="line">        std::vector&lt;<span class="type">int</span>&gt; list;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i &#123; <span class="number">0</span> &#125;; i &lt; <span class="number">65536</span>; ++i) &#123;</span><br><span class="line">            list.<span class="built_in">push_back</span>(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="built_in">calc</span>(vector);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>0.00803458s<br>0.00369133s<br>0.00206471s</p>
+<h2 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h2><p>如果用 set_default_resource 修改了默认的分配池，该 memory_resource 的生命期需要注意</p>
+<h2 id="实现解析，以-clang-为例"><a href="#实现解析，以-clang-为例" class="headerlink" title="实现解析，以 clang++ 为例"></a>实现解析，以 clang++ 为例</h2><p>monotonic_buffer_resource 是一个链表，每个节点是单调递减的</p>
+<p><img src="https://github.com/love1angel/love1angel.github.io/blob/hexo/source/_posts/languages/cpp/optimize/pmr_pict_1.svg?raw=true" alt="monotonic_buffer_resource 实现"></p>
+<ul>
+<li>如果用户指定 buf，则对 buf 的管理类似上图，但是没有 footer，直到 cur 减少到达 start</li>
+<li>没有指定 buf，则从 upstream 分配上图的 chunk + footer 块</li>
+<li>2 倍指数级申请新的 chunk</li>
+</ul>
+<p>do_deallocate 不做任何动作，在析构函数里一次性 release 所有 chunk。适用于需要不停分配，但一次性释放的场景，线程不安全</p>
+<hr>
+<p>unsynchronized_pool_resource</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">__adhoc_pool __adhoc_pool_;</span><br><span class="line">__fixed_pool* __fixed_pools_;</span><br></pre></td></tr></table></figure>
+
+<p>其中主要实现了 adhoc pool，adhoc pool 主要是和 upstream 交流。申请超大内存时，会由 upstream 分配释放，小内存则会提供内部满足容量中最小的 fixed pool</p>
+<p>fixed pools 在首次分配时，会构造内存相邻的多个 fixed pool 指针，可以对请求的内存容量求 log2() 得到下标（2^n 就是该 fixed pool 的容量），进行偏移访问，从而可用的 fixed pool 链表</p>
+<p>释放内存时，超大内存由 upstream 申请的，交由 upstream 释放。fixed pool 管理的只会添加到给该容量的 fixed pool 链表中，等待下一次使用。fixed pool 实现类似上面 chunk 和 footer，但是没有 cur。</p>
+<p>可以指定 pool options，largest_required_pool_block 求对数后得到 fixed pool 个数， max_blocks_per_chunk 指的 fixed pool 的最大容量</p>
+<hr>
+<p>synchronized_pool_resource 在开启多线程情况下，对 unsynchronized_pool_resource 封装了一层锁</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>pmr</p><p><a href="https://love1angel.github.io/2024/05/22/languages/cpp/optimize/pmr/">https://love1angel.github.io/2024/05/22/languages/cpp/optimize/pmr/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>Helianthus</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2024-05-22</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2024-06-24</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2024/06/06/linux/binutils/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">binutils usage</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2024/05/21/gdb/gdb-cpp/"><span class="level-item">gdb-cpp</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left  order-1"><!--!--></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/./img/avatar.svg" alt="Helianthus&#039;s Blog" height="28"></a><p class="is-size-7"><span>&copy; 2024 Helianthus</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p><p class="is-size-7">Made with 💖</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>
