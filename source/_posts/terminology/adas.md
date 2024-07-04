@@ -37,6 +37,12 @@ Blob (Binary large object) : 二进制大型对象，如图像
 
 ---
 
+RTK: 设备
+
+ViGEM: 高速数据记录仪
+
+pose: 姿态
+
 recall: 召回
 precision: 精度
 
