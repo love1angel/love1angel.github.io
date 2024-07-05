@@ -7,4 +7,7 @@ tags:
 
 <!-- more -->
 
+## clean cache
 
+清除 cache
+`bazel clean --expunge`
