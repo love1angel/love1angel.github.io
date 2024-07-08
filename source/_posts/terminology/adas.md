@@ -28,6 +28,7 @@ tunnels: 隧道
 ---
 SLAM (Simultaneous Localization And Mapping) : 同时定位与地图构建
 IMU (Inertial Measurement Unit) : 惯性测量单元
+odometry: 里程计
 
 Blob (Binary large object) : 二进制大型对象，如图像
 
