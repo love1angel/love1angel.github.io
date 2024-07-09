@@ -69,3 +69,5 @@ road cluster
 物体跟踪
 物体检测
 语义分割
+
+PNC: planning and control, 规划控制
