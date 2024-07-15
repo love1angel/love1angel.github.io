@@ -11,6 +11,8 @@ MDF4: 文件格式
 parquet: 文件格式
 pickle: 文件格式
 
+ADASIS V3: 高精地图的传输协议
+
 ---
 driving assistence: 辅助驾驶
 autonomuos driving: 自动驾驶
