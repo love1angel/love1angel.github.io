@@ -130,3 +130,23 @@ E2E: exchange to exchange
 E2E test: end to end test
 
 SMP (Symmetric multiprocessing) : 对称多处理
+
+## 图像，FFMPEG 雷神
+
+RGB (Red Green Blue):
+
+- 加色法
+- 常用于图像处理和显示
+- 每个像素由红绿蓝三个分量表示
+- 表示通常用 8 位 [0, 255] 表示强度或亮度，([0, 1] 表示了相对强度或亮度)
+- 每个像素点连续存储 R, G, B 的值，一般采取行优先存储
+
+YUV (YCbCr)
+
+- 亮度-色度编码
+- 常用于视频压缩和传输中
+- 将图像分解为亮度 Luminance（Y）和色度 Chrominance（U、V）两个分量，亮度表示图像的明暗信息，而色度表示颜色信息，这种分离有助于有效地压缩视频数据，因为亮度通常变化较小，而色度变化较大
+
+其中 U V 分量有不同的采样率，Y 分量先存储，UV 分量交叉存储，或者分别存储为两个平面
+
+YUV420, NV12, NV21

@@ -46,6 +46,7 @@ ViGEM: 高速数据记录仪
 
 pose: 姿态
 
+recap:
 recall: 召回
 precision: 精度
 
@@ -73,3 +74,7 @@ road cluster
 语义分割
 
 PNC: planning and control, 规划控制
+
+--- secret
+FCW ( Front Camera Wide):
+MRR ( Mid Range Radar):
