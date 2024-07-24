@@ -78,3 +78,9 @@ PNC: planning and control, 规划控制
 --- secret
 FCW ( Front Camera Wide):
 MRR ( Mid Range Radar):
+
+ADP (Automated Driving platform)
+
+ncap: 新车规范指导
+
+Data Ingestion: 数据获取
