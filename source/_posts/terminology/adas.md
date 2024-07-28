@@ -84,3 +84,6 @@ ADP (Automated Driving platform)
 ncap: 新车规范指导
 
 Data Ingestion: 数据获取
+
+--- 供应商
+Lidar: Velodyne 威力登
