@@ -38,6 +38,8 @@ Blob (Binary large object) : 二进制大型对象，如图像
 - Stereo: 双目相机
 - RGB-D: 深度相机
 
+ISP (Image Signal Processor) : 图像信号处理器
+
 ---
 
 RTK: 设备
