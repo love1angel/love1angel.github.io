@@ -7,11 +7,16 @@ tags:
 
 <!-- more -->
 
+.bag: ros1 中的 reprocessing 文件
+.mcap: foxglove 中的 reprocessing 文件
+
 MDF4: 文件格式
 parquet: 文件格式
 pickle: 文件格式
 
 ADASIS V3: 高精地图的传输协议
+
+laser: 激光
 
 ---
 driving assistence: 辅助驾驶
