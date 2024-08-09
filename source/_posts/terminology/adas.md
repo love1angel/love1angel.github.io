@@ -31,6 +31,7 @@ semantic segmentation (semseg) : 语义分割
 urban: 城市
 landmark: 路标
 tunnels: 隧道
+overpass: 天桥
 
 ---
 SLAM (Simultaneous Localization And Mapping) : 同时定位与地图构建
