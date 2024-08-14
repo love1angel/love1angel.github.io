@@ -38,25 +38,16 @@ SLAM (Simultaneous Localization And Mapping) : 同时定位与地图构建
 IMU (Inertial Measurement Unit) : 惯性测量单元
 odometry: 里程计
 
+物体识别 2D, 3D
+物体跟踪
+物体检测
+语义分割
+
 Blob (Binary large object) : 二进制大型对象，如图像
-
-- Monocular: 单目相机
-- Stereo: 双目相机
-- RGB-D: 深度相机
-
-ISP (Image Signal Processor) : 图像信号处理器
-
-D: []
-K: [454.5, 0, 540.7398071289062, 0, 454.5, 313.8982849121094, 0, 0, 1]
-R: [0, 0, 0, 0, 0, 0, 0, 0, 0]
-P: [454.5, 0, 540.7398071289062, 0, 0, 454.5, 313.8982849121094, 0, 0, 0, 1, 0]
 
 ---
 
 RTK: 设备
-
-ViGEM: 高速数据记录仪
-
 pose: 姿态
 
 recap:
@@ -81,11 +72,6 @@ quantized model: 量化模型
 fine tuning
 road cluster
 
-物体识别 2D, 3D
-物体跟踪
-物体检测
-语义分割
-
 PNC: planning and control, 规划控制
 
 --- secret
@@ -98,5 +84,35 @@ ncap: 新车规范指导
 
 Data Ingestion: 数据获取
 
---- 供应商
+inference engine: 推理引擎
+
+aggregator: 聚合器
+aggregation: 聚合
+
+optical flow: 光流法
+
+## camera
+
+intrinsics: 内参
+
+- Monocular: 单目相机
+- Stereo: 双目相机
+- RGB-D: 深度相机
+
+ISP (Image Signal Processor) : 图像信号处理器
+
+D: []
+K: [454.5, 0, 540.7398071289062, 0, 454.5, 313.8982849121094, 0, 0, 1]
+R: [0, 0, 0, 0, 0, 0, 0, 0, 0]
+P: [454.5, 0, 540.7398071289062, 0, 0, 454.5, 313.8982849121094, 0, 0, 0, 1, 0]
+
+## 供应商
+
+ViGEM: 高性能数据记录系统
+
 Lidar: Velodyne 威力登
+
+## JFrog
+
+artifactory: 人工制品
+artifacts: 文物
