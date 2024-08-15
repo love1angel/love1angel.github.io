@@ -36,6 +36,7 @@ overpass: 天桥
 ---
 SLAM (Simultaneous Localization And Mapping) : 同时定位与地图构建
 IMU (Inertial Measurement Unit) : 惯性测量单元
+轮式编码器
 odometry: 里程计
 
 物体识别 2D, 3D
@@ -50,16 +51,13 @@ Blob (Binary large object) : 二进制大型对象，如图像
 RTK: 设备
 pose: 姿态
 
-recap:
-recall: 召回
-precision: 精度
-
+scene: 场景
 motion: 运动
+structure: 结构
+Disparity: 视差
 
 rotation: 旋转
 translation: 平移
-
-Geometry: 几何学
 
 degree: 方向盘转向角度
 velocity: 速度
@@ -84,12 +82,18 @@ ncap: 新车规范指导
 
 Data Ingestion: 数据获取
 
-inference engine: 推理引擎
-
 aggregator: 聚合器
 aggregation: 聚合
 
 optical flow: 光流法
+
+## 多视图几何
+
+Geometry: 几何学
+
+yaw:
+roll
+pitch:
 
 ## camera
 
@@ -105,6 +109,16 @@ D: []
 K: [454.5, 0, 540.7398071289062, 0, 454.5, 313.8982849121094, 0, 0, 1]
 R: [0, 0, 0, 0, 0, 0, 0, 0, 0]
 P: [454.5, 0, 540.7398071289062, 0, 0, 454.5, 313.8982849121094, 0, 0, 0, 1, 0]
+
+## ML
+
+inference engine: 推理引擎
+
+check point: 检查站。模型的快照
+
+recap:
+recall: 召回
+precision: 精度
 
 ## 供应商
 
