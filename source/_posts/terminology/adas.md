@@ -51,6 +51,9 @@ Blob (Binary large object) : 二进制大型对象，如图像
 RTK: 设备
 pose: 姿态
 
+orientation: 方向
+pedestrian: 行人
+
 scene: 场景
 motion: 运动
 structure: 结构
