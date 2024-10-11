@@ -150,3 +150,7 @@ YUV (YCbCr)
 其中 U V 分量有不同的采样率，Y 分量先存储，UV 分量交叉存储，或者分别存储为两个平面
 
 YUV420, NV12, NV21
+
+TBH (to be honest)
+
+CWA (close without action)

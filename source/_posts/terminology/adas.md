@@ -51,7 +51,6 @@ Blob (Binary large object) : 二进制大型对象，如图像
 RTK: 设备
 pose: 姿态
 
-orientation: 方向
 pedestrian: 行人
 
 scene: 场景
@@ -61,6 +60,49 @@ Disparity: 视差
 
 rotation: 旋转
 translation: 平移
+
+aeb arbitration: aeb 仲裁
+
+---
+cyclist: 骑自行车的人
+
+w/: with
+w/o: without
+
+map license holder:
+delegate: 代表
+
+blinker: 转向灯
+intersection: 路口
+take intervene: 人工干预
+push accelerate pedal: 踩下油门踏板
+
+KL, keep lane: 车道保持
+KD, keep distance: 跟车
+
+implausible degradation: 难以置信的退化
+
+orientation: 方向
+swerve: 突然转向
+
+Cartesian: 笛卡尔
+Euler angle: 欧拉角
+
+overlap: 重叠
+
+forward collision warning: 前向碰撞预警
+red light warning: 红灯预警
+
+Hertz: 赫兹 hz
+    near field object: 10hz frequency
+
+V2X
+
+altitude: 海拔
+elevation information: 高度信息，中国不让采集
+BSM, RSM: [https://v2xlink.com/index.php?id=24]
+
+---
 
 degree: 方向盘转向角度
 velocity: 速度
@@ -128,6 +170,10 @@ precision: 精度
 ViGEM: 高性能数据记录系统
 
 Lidar: Velodyne 威力登
+
+Radar: APITV 安波福
+
+V2X: CMS(commsignia) 德思特
 
 ## JFrog
 
